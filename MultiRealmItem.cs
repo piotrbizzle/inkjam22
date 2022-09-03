@@ -7,7 +7,7 @@ public class MultiRealmItem : Item
     public Sprite[] realmSprites;
     public string[] realmItemNames;
 
-    void Start() {
+    public override void InitializeItemName() {
 	this.itemName = this.realmItemNames[this.currentRealm];
     }
     

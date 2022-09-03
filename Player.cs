@@ -21,7 +21,11 @@ public class Player : MonoBehaviour
     // controls
     private bool qHeld;
     private bool eHeld;
-
+    private bool spaceHeld;
+    
+    // colliders
+    public List<Item> collidedItems;
+    
     // travel stuff
     public int currentRealm = 0;
     public Zone currentZone;
@@ -31,6 +35,16 @@ public class Player : MonoBehaviour
     {
 	this.SetFrame(0);
 	this.currentZone.SetRealm(this.currentRealm);
+
+	// collision
+        this.gameObject.AddComponent<BoxCollider2D>();
+	this.gameObject.GetComponent<BoxCollider2D>().size = this.GetComponent<SpriteRenderer>().size;
+
+	Rigidbody2D rb = this.gameObject.AddComponent<Rigidbody2D>();
+	rb.gravityScale = 0.0f;
+	rb.constraints = RigidbodyConstraints2D.FreezeAll;
+	rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+	rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
     }
 
     // Update is called once per frame
@@ -88,11 +102,7 @@ public class Player : MonoBehaviour
     private void Act() {
 	// pick up item
 	bool ePressed = Input.GetKey("e");
-	if (ePressed && !this.eHeld) {
-	    this.PickUp();
-	}
 	this.eHeld = ePressed;
-   
 
 	// drop item
 	bool qPressed = Input.GetKey("q");
@@ -100,22 +110,68 @@ public class Player : MonoBehaviour
 	    this.Drop();
 	}
 	this.qHeld = qPressed;
+
+	// interact
+	bool spacePressed = Input.GetKey("space");
+	if (spacePressed && !this.spaceHeld) {
+	    this.Interact();
+	}
+	this.spaceHeld = spacePressed;
+
+	// clear colliders
+	this.collidedItems.Clear();
     }
 
-    private void PickUp() {
-	// TODO: actually pick up
-	this.currentZone.SetRealm(0);
+    void OnTriggerStay2D(Collider2D collider) {
+	// pick up item
+	Item item = collider.gameObject.GetComponent<Item>();
+	if (!this.eHeld || item == null) {
+	    return;
+	}
+	
+	int heldItemsCount = this.gameObject.transform.childCount;
+	if (heldItemsCount >= 3) {
+	    return;
+	}
+
+	GameObject pickedUpGo = collider.gameObject;
+	pickedUpGo.transform.parent = this.gameObject.transform;
+	
+	Vector3 playerPosition = this.gameObject.transform.position;
+	pickedUpGo.transform.position = new Vector3(playerPosition.x, playerPosition.y + (heldItemsCount + 1) * 1.5f, 0.0f);
+
     }
 
     private void Drop() {
-	// TODO: actually drop
-	this.currentZone.SetRealm(1);
+	int heldItemsCount = this.gameObject.transform.childCount;
+	if (heldItemsCount == 0) {
+	    return;
+	}
+	Transform droppedTransform = this.gameObject.transform.GetChild(heldItemsCount - 1);
+	droppedTransform.position = this.gameObject.transform.position;
+	droppedTransform.parent = this.currentZone.gameObject.transform;
     }
     
     private void SetFrame(int frame) {
         SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();
 	sr.sprite = this.frames[frame];
 	this.currentFrame = frame;
+    }
+
+    private void Interact() {
+	this.SetRealm(this.currentRealm == 1 ? 0 : 1);
+    }
+
+    private void SetRealm(int realm) {
+	// player
+	this.currentRealm = realm;       
+	foreach (Transform child in this.transform) {
+	    child.gameObject.GetComponent<Item>().MoveToRealm(realm);
+	}
+	
+	// zone
+	this.currentZone.SetRealm(realm);
+
     }
     
     /*

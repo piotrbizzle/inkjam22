@@ -7,6 +7,17 @@ public class Item : MonoBehaviour
     public string itemName;
     public int currentRealm;
 
+    void Start() {
+	// collision
+        this.gameObject.AddComponent<BoxCollider2D>();
+	this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+	this.gameObject.GetComponent<BoxCollider2D>().size = this.GetComponent<SpriteRenderer>().size;
+	
+	this.InitializeItemName();
+    }
+
+    public virtual void InitializeItemName() {}
+    
     public virtual string GetItemName(int realm) {
 	return this.itemName;
     }
