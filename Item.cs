@@ -59,6 +59,21 @@ public class Item : MonoBehaviour
 	}
     }
 
+    public void InitCreatedItem(string itemName, int realm) {
+	// scale and set sprite
+	this.gameObject.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
+	this.gameObject.AddComponent<SpriteRenderer>();
+	this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(itemName);
+
+	// set name
+	this.itemName = itemName;
+	this.InitializeItemName();
+	
+	// set realm
+	this.currentRealm = realm;
+	this.SetRealm(realm);
+    }
+
     private void SetAlpha(float alpha) {
 	this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, alpha);
     }

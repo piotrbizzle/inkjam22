@@ -216,6 +216,20 @@ public class Player : MonoBehaviour
 	}
 	this.inkStory.UpdateInventory(itemNames);
     }
+
+    public void ReceiveItem(string itemName) {
+	Item item = new GameObject().AddComponent<Item>();
+	item.InitCreatedItem(itemName, this.currentRealm);
+
+	if (this.gameObject.transform.childCount < 3) {
+	    // pick up item if there's room
+	    this.PickUp(item);
+	} else {
+	    // otherwise, drop item on the ground
+	    item.gameObject.transform.parent = this.currentZone.transform;
+	    item.gameObject.transform.position = this.gameObject.transform.position;
+	}
+    }
     
     private void SetFrame(int frame) {
         SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();

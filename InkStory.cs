@@ -11,7 +11,7 @@ public class InkStory : MonoBehaviour
     public SpriteRenderer screenDimmer;
     private Story story;
     public bool isVisible;
-    public List<string> currentTags;
+    public Player player;
     
     // UI Prefabs
     public Text textPrefab;
@@ -40,7 +40,7 @@ public class InkStory : MonoBehaviour
     	    Text dividerText = Instantiate(textPrefab) as Text;	     
 	    dividerText.transform.parent = this.canvas.transform;
 
-
+	    this.ProcessTags();
 	}
 	
 	if (story.currentChoices.Count > 0) {
@@ -64,6 +64,18 @@ public class InkStory : MonoBehaviour
     private void ClearView() {
 	foreach (Transform child in this.transform) {
 	    GameObject.Destroy(child.gameObject);
+	}
+    }
+
+    private void ProcessTags() {
+	for (int i = 0; i < story.currentTags.Count; i++) {
+	    string tag = story.currentTags[i].Trim();
+
+	    // give item item
+	    if (tag.StartsWith("give_")) {
+		string itemName = tag.Substring(5);
+		this.player.ReceiveItem(itemName);
+	    }
 	}
     }
 

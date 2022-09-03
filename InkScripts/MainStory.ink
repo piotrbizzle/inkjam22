@@ -23,7 +23,7 @@ Hohhohohohoho lad it is I, your liege, CAKE KING!!!
     -> fish_ending
 
 == ending ==
-- Good work
+- Good work, have a coin # give_coin
     + "Thanks"
     -> END
 
