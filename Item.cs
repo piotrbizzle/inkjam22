@@ -11,7 +11,7 @@ public class Item : MonoBehaviour
     public bool collides = false;
     
     // transition effect on MoveToRealm
-    private const float MaxTransitionCounter = 0.22f;
+    private const float MaxTransitionCounter = 0.25f;
     private const float HalfTransitionCounter = MaxTransitionCounter / 2;
     private float transitionCounter = 0.0f;
     
@@ -45,8 +45,7 @@ public class Item : MonoBehaviour
     	    // turning clear for the first half of counter
 	    float alpha = Math.Max(1 - (MaxTransitionCounter - this.transitionCounter) / HalfTransitionCounter, 0.0f);
 	    this.SetAlpha(alpha);
-	}
-	else if (this.transitionCounter > 0.0f) {	    
+	} else if (this.transitionCounter > 0.0f) {	    
 	    // turning solid for the second half
 	    float alpha = Math.Min((HalfTransitionCounter - this.transitionCounter) / HalfTransitionCounter, 1.0f);
 	    this.SetAlpha(alpha);

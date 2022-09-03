@@ -12,7 +12,11 @@ public class InkStory : MonoBehaviour
     private Story story;
     public bool isVisible;
     public Player player;
-    
+    public string destinationZoneName;
+    public bool destinationHasCoordinates;
+    public float destinationX;
+    public float destinationY;
+
     // UI Prefabs
     public Text textPrefab;
     public Button buttonPrefab;
@@ -56,8 +60,14 @@ public class InkStory : MonoBehaviour
 	} else {
 	    // exit out of story
 	    this.ClearView();
-	    this.screenDimmer.color = Color.clear;
 	    this.isVisible = false;
+	    
+	    if (this.destinationZoneName != "") {
+		this.player.TeleportToZone(this.destinationZoneName, this.destinationX, this.destinationY, this.destinationHasCoordinates);
+		this.destinationZoneName = "";
+	    } else {
+		this.screenDimmer.color = Color.clear;
+	    }
 	}
     }
 
@@ -85,8 +95,17 @@ public class InkStory : MonoBehaviour
 
 	    // teleport player to new zone
 	    if (tag.StartsWith("send_to_")) {
-		string zoneName = tag.Substring(8);
-		this.player.TeleportToZone(zoneName);
+		string content = tag.Substring(8);
+		string[] contentParts = content.Split('|');
+		
+		this.destinationZoneName = contentParts[0];
+		if (contentParts.Length > 1) {
+		    this.destinationX = float.Parse(contentParts[1]);
+		    this.destinationY = float.Parse(contentParts[2]);
+		    this.destinationHasCoordinates = true;
+		} else {
+		    this.destinationHasCoordinates = false;
+		}
 	    }
 	}
     }

@@ -32,13 +32,13 @@ VAR score = 0
     -> END
 
 == bad_ending ==
-- You will be punished for this.
+- You will be punished for this. # send_to_zone0
     + "Seems Bad"
     ~ score = score - 10
     -> END
     
 == tp_ending ==
-- Bam! # send_to_zone0
+- Bam! # send_to_zone0|-2.6|-1.6
     + "Wow"
     -> END
     

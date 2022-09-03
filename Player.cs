@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class Player : MonoBehaviour
 {
     // ink stuff
     public InkStory inkStory;
+
+    // ui stuff
+    public SpriteRenderer screenDimmer;
     
     // screen boundaries
     private const float ScreenTopY = 5.0f;
@@ -30,7 +34,14 @@ public class Player : MonoBehaviour
     public int currentRealm = 0;
     public Zone currentZone;
     private Dictionary<string, Zone> zoneDirectory = new Dictionary<string, Zone>();
-    
+    private Zone destinationZone;
+    private float destinationX;
+    private float destinationY;
+    private bool destinationHasCoordinates;
+    private const float MaxTeleportCounter = 0.8f;
+    private const float HalfTeleportCounter = MaxTeleportCounter / 2;
+    private float teleportCounter = 0.0f;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -59,6 +70,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+	if (this.destinationZone != null) {
+	    this.TeleportZoneUpdate();
+	}
+
 	if (this.inkStory.isVisible) {
 	    return;
 	}
@@ -261,9 +276,38 @@ public class Player : MonoBehaviour
 	this.UpdateInkStoryInventory();
     }
 
-    public void TeleportToZone(string zoneName) {
-	Zone zone = this.zoneDirectory[zoneName];
-	this.SwapZones(zone);
+    public void TeleportToZone(string zoneName, float x, float y, bool hasCoordinates) {
+	this.destinationZone = this.zoneDirectory[zoneName];
+	this.destinationX = x;
+	this.destinationY = y;
+	this.teleportCounter = MaxTeleportCounter;	
+	this.destinationHasCoordinates = hasCoordinates;
+    }
+
+    public void TeleportZoneUpdate() {
+	bool isPreTeleportBeforeDecrement = this.teleportCounter > HalfTeleportCounter;
+	this.teleportCounter -= Time.deltaTime;
+
+	if (this.teleportCounter > HalfTeleportCounter) {
+	    // turning solid for the first half of the counter
+	    float alpha = Math.Min(1 + 0.7f * (HalfTeleportCounter - this.teleportCounter) / HalfTeleportCounter, 1.0f);
+	    this.screenDimmer.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+	} else if (this.teleportCounter > 0.0f) {
+	    // then turning clear
+	    float alpha = Math.Max(1 + (1 - (MaxTeleportCounter - this.teleportCounter) / HalfTeleportCounter), 0.0f);
+	    this.screenDimmer.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+	} else {
+	    this.screenDimmer.color = Color.clear;
+	    this.destinationZone = null;
+	}
+
+	// do the actual teleport
+	if (isPreTeleportBeforeDecrement && this.teleportCounter <= HalfTeleportCounter) {
+	    this.SwapZones(this.destinationZone);
+	    if (this.destinationHasCoordinates) {
+		this.gameObject.transform.position = new Vector3(this.destinationX, this.destinationY, 0.0f);
+	    }
+	}
     }
     
     private void SetFrame(int frame) {
