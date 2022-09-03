@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     public Zone currentZone;
     private Dictionary<string, Zone> zoneDirectory = new Dictionary<string, Zone>();
     private Zone destinationZone;
+    private int destinationRealm;
+    private bool destinationHasRealm;
     private float destinationX;
     private float destinationY;
     private bool destinationHasCoordinates;
@@ -276,12 +278,15 @@ public class Player : MonoBehaviour
 	this.UpdateInkStoryInventory();
     }
 
-    public void TeleportToZone(string zoneName, float x, float y, bool hasCoordinates) {
+    // this is the worst part of the code
+    public void TeleportToZone(string zoneName, int realm, bool hasRealm, float x, float y, bool hasCoordinates) {
 	this.destinationZone = this.zoneDirectory[zoneName];
+	this.destinationRealm = realm;
+	this.destinationHasRealm = hasRealm;
 	this.destinationX = x;
 	this.destinationY = y;
-	this.teleportCounter = MaxTeleportCounter;	
 	this.destinationHasCoordinates = hasCoordinates;
+	this.teleportCounter = MaxTeleportCounter;	
     }
 
     public void TeleportZoneUpdate() {
@@ -306,6 +311,9 @@ public class Player : MonoBehaviour
 	    this.SwapZones(this.destinationZone);
 	    if (this.destinationHasCoordinates) {
 		this.gameObject.transform.position = new Vector3(this.destinationX, this.destinationY, 0.0f);
+	    }
+	    if (this.destinationHasRealm) {
+		this.SetRealm(this.destinationRealm);
 	    }
 	}
     }

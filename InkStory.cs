@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,12 @@ public class InkStory : MonoBehaviour
     private Story story;
     public bool isVisible;
     public Player player;
-    public string destinationZoneName;
-    public bool destinationHasCoordinates;
-    public float destinationX;
-    public float destinationY;
+    private string destinationZoneName;
+    private bool destinationHasCoordinates;
+    private bool destinationHasRealm;
+    private int destinationRealm;
+    private float destinationX;
+    private float destinationY;
 
     // UI Prefabs
     public Text textPrefab;
@@ -63,7 +66,7 @@ public class InkStory : MonoBehaviour
 	    this.isVisible = false;
 	    
 	    if (this.destinationZoneName != "") {
-		this.player.TeleportToZone(this.destinationZoneName, this.destinationX, this.destinationY, this.destinationHasCoordinates);
+		this.player.TeleportToZone(this.destinationZoneName, this.destinationRealm, this.destinationHasRealm, this.destinationX, this.destinationY, this.destinationHasCoordinates);
 		this.destinationZoneName = "";
 	    } else {
 		this.screenDimmer.color = Color.clear;
@@ -99,12 +102,28 @@ public class InkStory : MonoBehaviour
 		string[] contentParts = content.Split('|');
 		
 		this.destinationZoneName = contentParts[0];
-		if (contentParts.Length > 1) {
+		if (contentParts.Length == 1) {
+		    // no realm or coordinates
+		    this.destinationHasCoordinates = false;
+		    this.destinationHasRealm = false;
+		} else if (contentParts.Length == 2) {
+		    // realm
+		    this.destinationRealm = Int32.Parse(contentParts[1]);
+		    this.destinationHasCoordinates = false;
+		    this.destinationHasRealm = true;
+		} else if (contentParts.Length == 2) {
+		    // coordinates
 		    this.destinationX = float.Parse(contentParts[1]);
 		    this.destinationY = float.Parse(contentParts[2]);
 		    this.destinationHasCoordinates = true;
+		    this.destinationHasRealm = false;
 		} else {
+		    // realm and coordinates
+		    this.destinationRealm = Int32.Parse(contentParts[1]);
+		    this.destinationX = float.Parse(contentParts[2]);
+		    this.destinationY = float.Parse(contentParts[3]);
 		    this.destinationHasCoordinates = false;
+		    this.destinationHasRealm = true;
 		}
 	    }
 	}
