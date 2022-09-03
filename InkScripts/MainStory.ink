@@ -21,6 +21,8 @@ VAR score = 0
     -> ending
  + "You are a weird little guy."
     -> bad_ending
+ + "Teleport me!"
+    -> tp_ending
  + {inventory_has("fish")} "Give me a coin for this fish"
     -> fish_ending
 
@@ -33,6 +35,11 @@ VAR score = 0
 - You will be punished for this.
     + "Seems Bad"
     ~ score = score - 10
+    -> END
+    
+== tp_ending ==
+- Bam! # send_to_zone0
+    + "Wow"
     -> END
     
 == fish_ending ==

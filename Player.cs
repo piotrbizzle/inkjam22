@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     // travel stuff
     public int currentRealm = 0;
     public Zone currentZone;
+    private Dictionary<string, Zone> zoneDirectory = new Dictionary<string, Zone>();
     
     // Start is called before the first frame update
     public void Start()
@@ -45,6 +46,14 @@ public class Player : MonoBehaviour
 	rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 	rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 	rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
+
+	// create mapping from each the name of each zone that can be
+        // teleported to to the zone
+	GameObject[] teleportZoneGos = GameObject.FindGameObjectsWithTag("TeleportZone");
+	foreach (GameObject teleportZoneGo in teleportZoneGos) {
+	    Zone teleportZone = teleportZoneGo.GetComponent<Zone>();
+	    this.zoneDirectory[teleportZoneGo.name] = teleportZone;
+	}	
     }
 
     // Update is called once per frame
@@ -250,6 +259,11 @@ public class Player : MonoBehaviour
 	}
 
 	this.UpdateInkStoryInventory();
+    }
+
+    public void TeleportToZone(string zoneName) {
+	Zone zone = this.zoneDirectory[zoneName];
+	this.SwapZones(zone);
     }
     
     private void SetFrame(int frame) {

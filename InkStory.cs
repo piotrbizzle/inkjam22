@@ -82,6 +82,12 @@ public class InkStory : MonoBehaviour
 		string itemName = tag.Substring(5);
 		this.player.LoseItem(itemName);
 	    }
+
+	    // teleport player to new zone
+	    if (tag.StartsWith("send_to_")) {
+		string zoneName = tag.Substring(8);
+		this.player.TeleportToZone(zoneName);
+	    }
 	}
     }
 
