@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // ink stuff
+    public InkStory inkStory;
+    
     // screen boundaries
     private const float ScreenTopY = 5.0f;
     private const float ScreenBottomY = -5.0f;
@@ -50,6 +53,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+	if (this.inkStory.isVisible) {
+	    return;
+	}
         this.Move();
 	this.MoveZones();
 	this.Act();
@@ -190,8 +196,9 @@ public class Player : MonoBehaviour
 	this.currentFrame = frame;
     }
 
-    private void Interact() {
-	this.SetRealm(this.currentRealm == 1 ? 0 : 1);
+    private void Interact() {	
+	// this.SetRealm(this.currentRealm == 1 ? 0 : 1);
+	this.inkStory.OpenStory("introduction");
     }
 
     private void SetRealm(int realm) {
