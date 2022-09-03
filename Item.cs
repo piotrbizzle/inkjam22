@@ -18,7 +18,6 @@ public class Item : MonoBehaviour
     public void Start() {
 	// collision
         this.gameObject.AddComponent<BoxCollider2D>();
-	this.gameObject.GetComponent<BoxCollider2D>().size = this.GetComponent<SpriteRenderer>().size;
 
 	if (this.collides) {
 	    this.gameObject.AddComponent<Rigidbody2D>();
@@ -29,7 +28,6 @@ public class Item : MonoBehaviour
 	}
 	
 	this.InitializeItemName();
-	this.SetRealm(0);
     }
 
     public void Update() {
@@ -62,7 +60,7 @@ public class Item : MonoBehaviour
 	// scale and set sprite
 	this.gameObject.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
 	this.gameObject.AddComponent<SpriteRenderer>();
-	this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(itemName);
+	this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("foods/" + itemName);
 
 	// set name
 	this.gameObject.name = itemName;

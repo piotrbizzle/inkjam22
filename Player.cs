@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-	this.SetFrame(0);
+	this.SetFrame(0);	
 	this.currentZone.SetRealm(this.currentRealm);
 
 	// collision
@@ -259,20 +259,21 @@ public class Player : MonoBehaviour
 
     public void LoseItem(string itemName) {
 	Vector3 playerPosition = this.gameObject.transform.position;
-	bool didDeleteItem = false;
 
+	int heldItemIdx = 1;
+	bool destroyedAnItem = false;
 	for (int i = 0; i < this.gameObject.transform.childCount; i++) {
 	    Transform child = this.gameObject.transform.GetChild(i);
-	    if (child.gameObject.GetComponent<Item>().GetItemName() == itemName) {
+	    if (child.gameObject.GetComponent<Item>().GetItemName() == itemName && !destroyedAnItem) {
 		child.parent = child.parent.parent; // fixes held item count
 		GameObject.Destroy(child.gameObject);
-		didDeleteItem = true;
+		destroyedAnItem = true;
 		continue;
 	    }
 
 	    // move inventory items to correct spot
-	    int newChildIndex = didDeleteItem ? i : i - 1;
-	    child.position = new Vector3(playerPosition.x, playerPosition.y + newChildIndex * 1.5f, 0.0f);
+	    child.position = new Vector3(playerPosition.x, playerPosition.y + heldItemIdx * 1.5f, 0.0f);
+	    heldItemIdx += 1;
 	}
 
 	this.UpdateInkStoryInventory();

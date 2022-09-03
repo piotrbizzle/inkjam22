@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MultiRealmItem : Item
 {
-    public Sprite[] realmSprites;
-    public string[] realmItemNames;
+    public Sprite[] realmSprites = new Sprite[4];
+    public string[] realmItemNames = new string[4];
 
     public override void InitializeItemName() {
 	this.itemName = this.realmItemNames[this.currentRealm];
@@ -24,7 +24,7 @@ public class MultiRealmItem : Item
 	    this.gameObject.SetActive(true);
 	} else {
 	    // deactivate
-    	    this.gameObject.SetActive(true);
+    	    this.gameObject.SetActive(false);
 	}
     }
 }

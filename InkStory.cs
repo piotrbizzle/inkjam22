@@ -13,7 +13,7 @@ public class InkStory : MonoBehaviour
     private Story story;
     public bool isVisible;
     public Player player;
-    private string destinationZoneName;
+    private string destinationZoneName = "";
     private bool destinationHasCoordinates;
     private bool destinationHasRealm;
     private int destinationRealm;
