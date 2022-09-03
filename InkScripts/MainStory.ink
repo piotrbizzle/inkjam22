@@ -1,6 +1,7 @@
 VAR inventory_0 = ""
 VAR inventory_1 = ""
 VAR inventory_2 = ""
+VAR score = 0
 
 == function inventory_has(item) ==
 {
@@ -14,7 +15,8 @@ VAR inventory_2 = ""
     ~ return false
 
 == cake_king ==
-Hohhohohohoho lad it is I, your liege, CAKE KING!!!
+- Hohhohohohoho lad it is I, your liege, CAKE KING!!!
+- The remaining ransom is ${100 - score}
  + "Your Majesty!"
     -> ending
  + "You are a weird little guy."
@@ -23,13 +25,14 @@ Hohhohohohoho lad it is I, your liege, CAKE KING!!!
     -> fish_ending
 
 == ending ==
-- Good work
+- Good work. 
     + "Thanks"
     -> END
 
 == bad_ending ==
 - You will be punished for this.
     + "Seems Bad"
+    ~ score = score - 10
     -> END
     
 == fish_ending ==
