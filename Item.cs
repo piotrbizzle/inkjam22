@@ -7,7 +7,7 @@ public class Item : MonoBehaviour
     public string itemName;
     public int currentRealm;
 
-    void Start() {
+    public void Start() {
 	// collision
         this.gameObject.AddComponent<BoxCollider2D>();
 	this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;

@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public Zone currentZone;
     
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
 	this.SetFrame(0);
 	this.currentZone.SetRealm(this.currentRealm);
@@ -48,9 +48,10 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         this.Move();
+	this.MoveZones();
 	this.Act();
     }
     
@@ -97,6 +98,37 @@ public class Player : MonoBehaviour
 	} else {
 	    this.SetFrame((this.currentFrame) % 2 + 2);
 	}
+    }
+
+    private void MoveZones() {
+	// go north
+	Transform playerTransform = this.gameObject.transform;
+	if (playerTransform.position.y > ScreenTopY && currentZone.north != null) {
+	    playerTransform.Translate(new Vector3(0.0f, -9.5f, 0.0f));
+    	    this.SwapZones(this.currentZone.north);
+	}
+	// go south
+	if (playerTransform.position.y < ScreenBottomY && currentZone.south != null) {
+	    playerTransform.Translate(new Vector3(0.0f, 9.5f, 0.0f));
+    	    this.SwapZones(this.currentZone.south);
+	}
+	// go east
+	if (playerTransform.position.x > ScreenRightX && currentZone.east != null) {
+    	    playerTransform.Translate(new Vector3(-15.5f, 0.0f, 0.0f));
+	    this.SwapZones(this.currentZone.east);
+	}
+	// go west
+	if (playerTransform.position.x < ScreenLeftX && currentZone.west != null) {
+	    playerTransform.Translate(new Vector3(15.5f, 0.0f, 0.0f));
+	    this.SwapZones(this.currentZone.west);
+	}
+    }
+
+    private void SwapZones(Zone newZone) {
+	    this.currentZone.SetActive(false);
+	    this.currentZone = newZone;
+	    this.currentZone.SetActive(true);
+    	    this.currentZone.SetRealm(this.currentRealm);    
     }
 
     private void Act() {
