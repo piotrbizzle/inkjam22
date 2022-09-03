@@ -13,24 +13,34 @@ public class Player : MonoBehaviour
 
     // animation stuff
     private const int PlayerAnimationDelay = 10;   
-    public List<Sprite> frames;
+    public Sprite[] frames;
     private int currentFrame = 0;
     private int playerAnimationCounter = PlayerAnimationDelay;
     private int playerFacing = 0; // 0 = left, 1 = right
 
+    // controls
+    private bool qHeld;
+    private bool eHeld;
+
+    // travel stuff
+    public int currentRealm = 0;
+    public Zone currentZone;
+    
     // Start is called before the first frame update
     void Start()
     {
 	this.SetFrame(0);
+	this.currentZone.SetRealm(this.currentRealm);
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.MovePlayer();
+        this.Move();
+	this.Act();
     }
-
-    void MovePlayer()
+    
+    private void Move()
     {
 	bool up = Input.GetKey("w");
 	bool down = Input.GetKey("s");
@@ -75,6 +85,33 @@ public class Player : MonoBehaviour
 	}
     }
 
+    private void Act() {
+	// pick up item
+	bool ePressed = Input.GetKey("e");
+	if (ePressed && !this.eHeld) {
+	    this.PickUp();
+	}
+	this.eHeld = ePressed;
+   
+
+	// drop item
+	bool qPressed = Input.GetKey("q");
+	if (qPressed && !this.qHeld) {
+	    this.Drop();
+	}
+	this.qHeld = qPressed;
+    }
+
+    private void PickUp() {
+	// TODO: actually pick up
+	this.currentZone.SetRealm(0);
+    }
+
+    private void Drop() {
+	// TODO: actually drop
+	this.currentZone.SetRealm(1);
+    }
+    
     private void SetFrame(int frame) {
         SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();
 	sr.sprite = this.frames[frame];
