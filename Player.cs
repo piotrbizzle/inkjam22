@@ -180,7 +180,7 @@ public class Player : MonoBehaviour
     }
 
     private void PickUp(Item item) {
-	if (!item.pickUpable) {
+	if (!item.pickUpable || item.gameObject.transform.parent == this.gameObject.transform) {
 	    return;
 	}
 	int heldItemsCount = this.gameObject.transform.childCount;
@@ -229,6 +229,27 @@ public class Player : MonoBehaviour
 	    item.gameObject.transform.parent = this.currentZone.transform;
 	    item.gameObject.transform.position = this.gameObject.transform.position;
 	}
+    }
+
+    public void LoseItem(string itemName) {
+	Vector3 playerPosition = this.gameObject.transform.position;
+	bool didDeleteItem = false;
+
+	for (int i = 0; i < this.gameObject.transform.childCount; i++) {
+	    Transform child = this.gameObject.transform.GetChild(i);
+	    if (child.gameObject.GetComponent<Item>().GetItemName() == itemName) {
+		child.parent = child.parent.parent; // fixes held item count
+		GameObject.Destroy(child.gameObject);
+		didDeleteItem = true;
+		continue;
+	    }
+
+	    // move inventory items to correct spot
+	    int newChildIndex = didDeleteItem ? i : i - 1;
+	    child.position = new Vector3(playerPosition.x, playerPosition.y + newChildIndex * 1.5f, 0.0f);
+	}
+
+	this.UpdateInkStoryInventory();
     }
     
     private void SetFrame(int frame) {

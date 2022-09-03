@@ -71,10 +71,16 @@ public class InkStory : MonoBehaviour
 	for (int i = 0; i < story.currentTags.Count; i++) {
 	    string tag = story.currentTags[i].Trim();
 
-	    // give item item
+	    // give item
 	    if (tag.StartsWith("give_")) {
 		string itemName = tag.Substring(5);
 		this.player.ReceiveItem(itemName);
+	    }
+	    
+	    // take item
+	    if (tag.StartsWith("take_")) {
+		string itemName = tag.Substring(5);
+		this.player.LoseItem(itemName);
 	    }
 	}
     }

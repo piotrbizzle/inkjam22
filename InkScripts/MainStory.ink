@@ -19,11 +19,11 @@ Hohhohohohoho lad it is I, your liege, CAKE KING!!!
     -> ending
  + "You are a weird little guy."
     -> bad_ending
- + {inventory_has("fish")} "Look at this fish"
+ + {inventory_has("fish")} "Give me a coin for this fish"
     -> fish_ending
 
 == ending ==
-- Good work, have a coin # give_coin
+- Good work
     + "Thanks"
     -> END
 
@@ -33,6 +33,6 @@ Hohhohohohoho lad it is I, your liege, CAKE KING!!!
     -> END
     
 == fish_ending ==
-- Nice fish.
+- Deal #take_fish # give_coin
   + "Thanks"
   -> END

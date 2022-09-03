@@ -66,6 +66,7 @@ public class Item : MonoBehaviour
 	this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(itemName);
 
 	// set name
+	this.gameObject.name = itemName;
 	this.itemName = itemName;
 	this.InitializeItemName();
 	
