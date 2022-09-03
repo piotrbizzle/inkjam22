@@ -11,8 +11,8 @@ public class MultiRealmItem : Item
 	this.itemName = this.realmItemNames[this.currentRealm];
     }
 
-    public override string GetItemName(int realm) {
-	return this.realmItemNames[realm];
+    public override string GetItemName() {
+	return this.realmItemNames[this.currentRealm];
     }
 
     // updates item when realm is switched

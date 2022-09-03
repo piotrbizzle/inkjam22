@@ -193,6 +193,8 @@ public class Player : MonoBehaviour
 	
 	Vector3 playerPosition = this.gameObject.transform.position;
 	itemGo.transform.position = new Vector3(playerPosition.x, playerPosition.y + (heldItemsCount + 1) * 1.5f, 0.0f);
+
+	this.UpdateInkStoryInventory();
     }
     
     private void Drop() {
@@ -203,6 +205,16 @@ public class Player : MonoBehaviour
 	Transform droppedTransform = this.gameObject.transform.GetChild(heldItemsCount - 1);
 	droppedTransform.position = this.gameObject.transform.position;
 	droppedTransform.parent = this.currentZone.gameObject.transform;
+
+	this.UpdateInkStoryInventory();
+    }
+
+    private void UpdateInkStoryInventory() {
+	List<string> itemNames = new List<string>();
+	foreach (Transform child in this.transform) {
+	    itemNames.Add(child.gameObject.GetComponent<Item>().GetItemName());
+	}
+	this.inkStory.UpdateInventory(itemNames);
     }
     
     private void SetFrame(int frame) {

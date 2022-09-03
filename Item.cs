@@ -44,14 +44,14 @@ public class Item : MonoBehaviour
 	if (this.transitionCounter > HalfTransitionCounter) {
     	    // turning clear for the first half of counter
 	    float alpha = Math.Max(1 - (MaxTransitionCounter - this.transitionCounter) / HalfTransitionCounter, 0.0f);
-	    this.setAlpha(alpha);
+	    this.SetAlpha(alpha);
 	}
 	else if (this.transitionCounter > 0.0f) {	    
 	    // turning solid for the second half
 	    float alpha = Math.Min((HalfTransitionCounter - this.transitionCounter) / HalfTransitionCounter, 1.0f);
-	    this.setAlpha(alpha);
+	    this.SetAlpha(alpha);
 	} else {
-    	    this.setAlpha(1.0f);
+    	    this.SetAlpha(1.0f);
 	}
        
 	if (isPreSwapBeforeDecrement && this.transitionCounter <= HalfTransitionCounter) {
@@ -59,13 +59,13 @@ public class Item : MonoBehaviour
 	}
     }
 
-    private void setAlpha(float alpha) {
+    private void SetAlpha(float alpha) {
 	this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, alpha);
     }
     
     public virtual void InitializeItemName() {}
     
-    public virtual string GetItemName(int realm) {
+    public virtual string GetItemName() {
 	return this.itemName;
     }
 

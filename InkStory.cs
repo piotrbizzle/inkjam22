@@ -11,6 +11,7 @@ public class InkStory : MonoBehaviour
     public SpriteRenderer screenDimmer;
     private Story story;
     public bool isVisible;
+    public List<string> currentTags;
     
     // UI Prefabs
     public Text textPrefab;
@@ -38,6 +39,8 @@ public class InkStory : MonoBehaviour
 
     	    Text dividerText = Instantiate(textPrefab) as Text;	     
 	    dividerText.transform.parent = this.canvas.transform;
+
+
 	}
 	
 	if (story.currentChoices.Count > 0) {
@@ -82,9 +85,19 @@ public class InkStory : MonoBehaviour
     }
 
     // When we click the choice button, tell the story to choose that choice!
-    void OnClickChoiceButton (Choice choice) {
+    private void OnClickChoiceButton (Choice choice) {
 	this.story.ChooseChoiceIndex(choice.index);
 	this.story.Continue();
 	RefreshView();
+    }
+
+    public void UpdateInventory(List<string> itemNames) {
+	for (int i = 0; i < 3; i++) {
+	    if (i < itemNames.Count) {
+		this.story.variablesState["inventory_" + i.ToString()] = itemNames[i];
+	    } else {
+		this.story.variablesState["inventory_" + i.ToString()] = "";
+	    }
+	}
     }
 }
