@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 
 	Rigidbody2D rb = this.gameObject.AddComponent<Rigidbody2D>();
 	rb.gravityScale = 0.0f;
-	rb.constraints = RigidbodyConstraints2D.FreezeAll;
+	rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 	rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 	rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
     }

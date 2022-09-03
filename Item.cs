@@ -8,7 +8,8 @@ public class Item : MonoBehaviour
     public string itemName;
     public int currentRealm;
     public bool pickUpable = true;
-
+    public bool collides = false;
+    
     // transition effect on MoveToRealm
     private const float MaxTransitionCounter = 0.22f;
     private const float HalfTransitionCounter = MaxTransitionCounter / 2;
@@ -17,8 +18,15 @@ public class Item : MonoBehaviour
     public void Start() {
 	// collision
         this.gameObject.AddComponent<BoxCollider2D>();
-	this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
 	this.gameObject.GetComponent<BoxCollider2D>().size = this.GetComponent<SpriteRenderer>().size;
+
+	if (this.collides) {
+	    this.gameObject.AddComponent<Rigidbody2D>();
+	    this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
+	    this.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+	} else {
+	    this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+	}
 	
 	this.InitializeItemName();
 	this.SetRealm(0);
