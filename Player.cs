@@ -15,20 +15,17 @@ public class Player : MonoBehaviour
     private const float ScreenEdgeBuffer = 0.25f;
 
     // animation stuff
-    private const int PlayerAnimationDelay = 10;   
+    private const float PlayerAnimationDelay = 0.1f;   
     public Sprite[] frames;
     private int currentFrame = 0;
-    private int playerAnimationCounter = PlayerAnimationDelay;
+    private float playerAnimationCounter = PlayerAnimationDelay;
     private int playerFacing = 0; // 0 = left, 1 = right
 
     // controls
     private bool qHeld;
     private bool eHeld;
     private bool spaceHeld;
-    
-    // colliders
-    public List<Item> collidedItems;
-    
+        
     // travel stuff
     public int currentRealm = 0;
     public Zone currentZone;
@@ -90,8 +87,8 @@ public class Player : MonoBehaviour
 	}
 
        if (left || right || up || down) {
-	    this.playerAnimationCounter -= 1;
-	    if (playerAnimationCounter == 0) {
+	    this.playerAnimationCounter -= Time.deltaTime;
+	    if (playerAnimationCounter <= 0.0f) {
 		this.playerAnimationCounter = PlayerAnimationDelay;
 		this.currentFrame += 1;
 	    }
@@ -139,8 +136,7 @@ public class Player : MonoBehaviour
 
     private void Act() {
 	// pick up item
-	bool ePressed = Input.GetKey("e");
-	this.eHeld = ePressed;
+	this.eHeld = Input.GetKey("e");
 
 	// drop item
 	bool qPressed = Input.GetKey("q");
@@ -150,36 +146,55 @@ public class Player : MonoBehaviour
 	this.qHeld = qPressed;
 
 	// interact
-	bool spacePressed = Input.GetKey("space");
-	if (spacePressed && !this.spaceHeld) {
-	    this.Interact();
-	}
-	this.spaceHeld = spacePressed;
-
-	// clear colliders
-	this.collidedItems.Clear();
+	this.spaceHeld = Input.GetKey("space");
     }
 
     void OnTriggerStay2D(Collider2D collider) {
-	// pick up item
-	Item item = collider.gameObject.GetComponent<Item>();
-	if (!this.eHeld || item == null) {
+	if (this.inkStory.isVisible) {
 	    return;
 	}
 	
+	// pick up item
+	Item item = collider.gameObject.GetComponent<Item>();
+	if (item != null && this.eHeld) {
+	    this.PickUp(item);
+	    return;
+	}
+
+	// start dialogue
+	Dialogue dialogue = collider.gameObject.GetComponent<Dialogue>();
+	if (dialogue != null && this.spaceHeld) {
+	    this.inkStory.OpenStory(dialogue.startingKnot);
+	    return;
+	}
+
+	// enter portal
+	Portal portal = collider.gameObject.GetComponent<Portal>();
+	if (portal != null && portal.isPortalReady() && this.spaceHeld) {
+	    int destinationRealm = portal.realmConnections[this.currentRealm];
+	    if (destinationRealm != -1) {
+		this.SetRealm(destinationRealm);
+		portal.resetPortal();
+	    }
+	}
+    }
+
+    private void PickUp(Item item) {
+	if (!item.pickUpable) {
+	    return;
+	}
 	int heldItemsCount = this.gameObject.transform.childCount;
 	if (heldItemsCount >= 3) {
 	    return;
 	}
 
-	GameObject pickedUpGo = collider.gameObject;
-	pickedUpGo.transform.parent = this.gameObject.transform;
+	GameObject itemGo = item.gameObject;
+	itemGo.transform.parent = this.gameObject.transform;
 	
 	Vector3 playerPosition = this.gameObject.transform.position;
-	pickedUpGo.transform.position = new Vector3(playerPosition.x, playerPosition.y + (heldItemsCount + 1) * 1.5f, 0.0f);
-
+	itemGo.transform.position = new Vector3(playerPosition.x, playerPosition.y + (heldItemsCount + 1) * 1.5f, 0.0f);
     }
-
+    
     private void Drop() {
 	int heldItemsCount = this.gameObject.transform.childCount;
 	if (heldItemsCount == 0) {
@@ -194,11 +209,6 @@ public class Player : MonoBehaviour
         SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();
 	sr.sprite = this.frames[frame];
 	this.currentFrame = frame;
-    }
-
-    private void Interact() {	
-	// this.SetRealm(this.currentRealm == 1 ? 0 : 1);
-	this.inkStory.OpenStory("introduction");
     }
 
     private void SetRealm(int realm) {

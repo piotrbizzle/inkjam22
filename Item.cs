@@ -6,7 +6,8 @@ public class Item : MonoBehaviour
 {
     public string itemName;
     public int currentRealm;
-
+    public bool pickUpable = true;
+    
     public void Start() {
 	// collision
         this.gameObject.AddComponent<BoxCollider2D>();
@@ -14,6 +15,7 @@ public class Item : MonoBehaviour
 	this.gameObject.GetComponent<BoxCollider2D>().size = this.GetComponent<SpriteRenderer>().size;
 	
 	this.InitializeItemName();
+	this.SetRealm(0);
     }
 
     public virtual void InitializeItemName() {}
