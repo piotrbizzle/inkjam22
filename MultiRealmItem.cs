@@ -10,7 +10,7 @@ public class MultiRealmItem : Item
     public override void InitializeItemName() {
 	this.itemName = this.realmItemNames[this.currentRealm];
     }
-    
+
     public override string GetItemName(int realm) {
 	return this.realmItemNames[realm];
     }
