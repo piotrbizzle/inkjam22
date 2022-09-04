@@ -101,6 +101,10 @@ public class InkStory : MonoBehaviour
 		string content = tag.Substring(8);
 		string[] contentParts = content.Split('|');
 		
+		foreach (string part in contentParts) {
+		    Debug.Log(part);
+		}
+
 		this.destinationZoneName = contentParts[0];
 		if (contentParts.Length == 1) {
 		    // no realm or coordinates
@@ -111,7 +115,7 @@ public class InkStory : MonoBehaviour
 		    this.destinationRealm = Int32.Parse(contentParts[1]);
 		    this.destinationHasCoordinates = false;
 		    this.destinationHasRealm = true;
-		} else if (contentParts.Length == 2) {
+		} else if (contentParts.Length == 3) {
 		    // coordinates
 		    this.destinationX = float.Parse(contentParts[1]);
 		    this.destinationY = float.Parse(contentParts[2]);

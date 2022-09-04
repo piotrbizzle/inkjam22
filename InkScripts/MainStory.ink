@@ -34,7 +34,35 @@ VAR score = 0
 - 1 Ice Cream with Syrup
 + "Okay"
     -> END
+
+== oatmeal_king ==
+- TOWRITE: Oatmeal king demands the ransom
++ "Okay"
+    -> END
+
+== knight_plain ==
+- This tower has been permanently closed for safety reasons!
++ "Okay"
+    -> END
     
+== knight_sweet ==
+- His Royal Majesty Oatmeal Raisin King has given me strict orders that nobody is permitted to enter except for a weird little rectangle chef guy. That must be you?
++ "Nah"
+    -> END
++ "I guess so"
+    - I'll escort you inside # send_to_towerFloor1|-3|-1.1
+    + "Okay"
+    -> END
+    
+== knight_sweet_2 ==
+- Ready to Leave?
++ "Nah"
+    -> END
++ "I guess so"
+    - I'll escort you out # send_to_towerEntrance|-0.3|-0.8
+    + "Okay"
+    -> END
+
 == tutorial_cake_king ==
 - My royal chef! It's so good to see you this morning. The Gentlebirds are singing and everything is lovely in the kingdom. It's incredible!
 + "Yes, Cake King, it is!"
