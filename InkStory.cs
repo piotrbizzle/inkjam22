@@ -122,7 +122,7 @@ public class InkStory : MonoBehaviour
 		    this.destinationRealm = Int32.Parse(contentParts[1]);
 		    this.destinationX = float.Parse(contentParts[2]);
 		    this.destinationY = float.Parse(contentParts[3]);
-		    this.destinationHasCoordinates = false;
+		    this.destinationHasCoordinates = true;
 		    this.destinationHasRealm = true;
 		}
 	    }
@@ -160,6 +160,13 @@ public class InkStory : MonoBehaviour
 	    } else {
 		this.story.variablesState["inventory_" + i.ToString()] = "";
 	    }
+	}
+    }
+
+    public void DebugInventory() {
+	for (int i = 0; i < 3; i++) {
+	    Debug.Log(i);
+	    Debug.Log(this.story.variablesState["inventory_" + i.ToString()]);
 	}
     }
 }

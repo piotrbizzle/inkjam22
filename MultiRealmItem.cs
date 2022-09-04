@@ -17,6 +17,8 @@ public class MultiRealmItem : Item
 
     // updates item when realm is switched
     public override void SetRealm(int realm) {
+	this.currentRealm = realm;
+	
 	if (this.realmSprites[realm] != null) {
 	    // activate and set sprite	    
 	    SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();
@@ -25,6 +27,12 @@ public class MultiRealmItem : Item
 	} else {
 	    // deactivate
     	    this.gameObject.SetActive(false);
+	}
+
+	GameObject parentGo = this.gameObject.transform.parent.gameObject;
+	Player player = parentGo.GetComponent<Player>();
+	if (player != null) {
+	    player.UpdateInkStoryInventory();
 	}
     }
 }

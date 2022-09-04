@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     private bool qHeld;
     private bool eHeld;
     private bool spaceHeld;
+    private bool mHeld;
         
     // travel stuff
     public int currentRealm = 0;
@@ -161,6 +162,13 @@ public class Player : MonoBehaviour
     }
 
     private void Act() {
+	// debug
+	bool mPressed = Input.GetKey("m");
+	if (mPressed && !this.mHeld) {
+	    this.inkStory.DebugInventory();
+	}
+	this.mHeld = mPressed;
+	
 	// pick up item
 	this.eHeld = Input.GetKey("e");
 
@@ -235,7 +243,7 @@ public class Player : MonoBehaviour
 	this.UpdateInkStoryInventory();
     }
 
-    private void UpdateInkStoryInventory() {
+    public void UpdateInkStoryInventory() {
 	List<string> itemNames = new List<string>();
 	foreach (Transform child in this.transform) {
 	    itemNames.Add(child.gameObject.GetComponent<Item>().GetItemName());
