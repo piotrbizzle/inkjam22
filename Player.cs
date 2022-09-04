@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     private bool eHeld;
     private bool spaceHeld;
     private bool mHeld;
+    private bool lHeld;
         
     // travel stuff
     public int currentRealm = 0;
@@ -168,6 +169,13 @@ public class Player : MonoBehaviour
 	    this.inkStory.DebugInventory();
 	}
 	this.mHeld = mPressed;
+
+	bool lPressed = Input.GetKey("l");
+	if (lPressed && !this.lHeld) {
+	    int nextRealm = this.currentRealm == 3 ? 0 : this.currentRealm + 1;
+	    this.SetRealm(nextRealm);
+	}
+	this.lHeld = lPressed;
 	
 	// pick up item
 	this.eHeld = Input.GetKey("e");

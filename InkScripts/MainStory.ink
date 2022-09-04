@@ -36,10 +36,10 @@ VAR score = 0
     -> END
     
 == tutorial_cake_king ==
-- My royal chef! It's so good to see you this morning. The birds are singing and everything is lovely in the kingdom. It's incredible!
-+ "Yes, my liege, it is!"
+- My royal chef! It's so good to see you this morning. The Gentlebirds are singing and everything is lovely in the kingdom. It's incredible!
++ "Yes, Cake King, it is!"
 - ...YET, I cannot escape the feeling that something terrible is about to happen.
-+ "What do you mean, Cake King?"
++ "What do you mean, your majesty?"
 - Perhaps it's nothing. Perhaps I'm just hungry. Why don't you whip me up some fish and chips? If you forget how, go talk to The Royal Wizard, Wizzy Woo, in the room to the West.
 + {inventory_has("fishAndChips")} "Here is your Fish and Chips, my liege"
     -> tutorial_cake_king_give_fish
@@ -48,7 +48,7 @@ VAR score = 0
     
 == tutorial_cake_king_give_fish ==
 - Yum yum yum. By the way, do you like the new rug? It commerates our adventure together last year. Remember that? 
-- I'm sure nothing that crazy will ever happen in our quiet kingdom EVER again #take_fishAndChips # send_to_throneRoom|3|-1.2|0.35
+- I'm sure nothing that crazy will ever happen in our quiet kingdom EVER again #take_fishAndChips # send_to_throneRoomTut|3|-1.2|0.35
 + "What's that noise?"
   -> END
   
@@ -56,7 +56,7 @@ VAR score = 0
 - \(A kingly figure made of Oatmeal Raisin dough emerges from the shadows and holds a knife to Cake King's throat\)
 - I'm taking your big idiot king hostage! If you ever want to see him again, come find me in THE SWEETYVERSE. I'll be waiting...
 + "THE SWEETYVERSE???"
--  \(The mysterious interloper steps through a purple portal, taking Cake King with him!\) # send_to_throneRoom|0|-1.2|0.35
+-  \(The mysterious interloper steps through a purple portal, taking Cake King with him!\) # send_to_throneRoomTut|0
 + "Alas!"
     -> END
 
@@ -81,7 +81,7 @@ VAR score = 0
 + "What a coincidence!"
 - Indeed! That purple oval in my summoning area is a portal directly to THE SWEETYVERSE. If you walk up to it and press Spacebar, you'll step through to the other side. But tread carefully! Portals act in strange and mysterious ways
 + "Strange and mysterious ways?"
-- Big time strange and mysterious. Raw ingredients carried through the portal change to become their parallel universe counterpart after passing through. For example, that bottle of Oil on my desk turns into Chocolate Syrup in THE SWEETYVERSE.
+- Raw ingredients carried through the portal change to become their parallel universe counterpart. For example, that bottle of Oil on my desk turns into Chocolate Syrup in THE SWEETYVERSE.
 + "How strange!"
 - BUT, prepared dishes seem to only exist in one universe at a time. If you prepare something in your Cooker and carry it through a portal, it won't change!
 + "How mysterious!"
@@ -93,7 +93,7 @@ VAR score = 0
     -> END
     
 == tutorial_wizard_2_give_banana ==
-- Fantastic work, chef! I'm confident you're ready to travel to THE SWEETYVERSE and rescue Cake King. God speed! # take_banana_split
+- Fantastic work, chef! I'm confident you're ready to travel to THE SWEETYVERSE and rescue Cake King. God speed! # take_bananaSplit #send_to_wizardRoom
 + "I'll do my best!"
     -> END
 

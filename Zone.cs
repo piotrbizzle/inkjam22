@@ -18,9 +18,9 @@ public class Zone : MonoBehaviour
     }
     
     public void Update() {
-	if (this.firstFrame && !this.isStartingZone) {
-	    this.SetActive(false);
-	    this.gameObject.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+	if (this.firstFrame) {
+	    this.SetActive(this.isStartingZone);
+    	    this.gameObject.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
 	    this.firstFrame = false;
 	}
     }
