@@ -35,4 +35,34 @@ public class MultiRealmItem : Item
 	    player.UpdateInkStoryInventory();
 	}
     }
+
+    public void InitCreatedItem(string itemName, int realm) {
+	// scale and set sprite
+	this.gameObject.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
+	this.gameObject.AddComponent<SpriteRenderer>();
+	Sprite sprite = Resources.Load<Sprite>("foods/" + itemName);
+	this.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+	this.realmSprites = new Sprite[]{sprite, sprite, sprite, sprite};
+	this.realmItemNames = new string[]{itemName, itemName, itemName, itemName};
+	
+	// set name
+	this.gameObject.name = itemName;
+	this.itemName = itemName;
+	this.currentRealm = realm;
+	this.InitializeItemName();
+	
+	// set realm
+	this.currentRealm = realm;
+	
+	if (this.realmSprites[realm] != null) {
+	    // activate and set sprite	    
+	    SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();
+	    sr.sprite = this.realmSprites[realm];
+	    this.gameObject.SetActive(true);
+	} else {
+	    // deactivate
+    	    this.gameObject.SetActive(false);
+	}
+    }
+
 }

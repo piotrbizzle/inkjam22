@@ -4,11 +4,11 @@ VAR inventory_2 = ""
 VAR score = 100
 
 // values
-VAR fishAndChips_value = 8
-VAR fries_value = 4
+VAR fishAndChips_value = 12
+VAR fries_value = 6
 VAR breadAndButter_value = 16
 VAR toastWithJam_value = 12
-VAR donut_value = 8
+VAR donut_value = 12
 VAR chocolateDonut_value = 16
 VAR pastryDough_value = 6
 VAR dough_value = 4
@@ -16,8 +16,8 @@ VAR powderedDonut_value = 16
 VAR jellyDonut_value = 16
 VAR cherryPie_value = 32
 VAR meatPie_value = 64
-VAR gentlebirdPie_value = 64
-VAR potatoBread_value = 8
+VAR gentlebirdPie_value = 69
+VAR potatoBread_value = 12
 VAR chips_value = 16
 VAR chipsAndSalsa_value = 32
 VAR nachos_value = 32
@@ -28,17 +28,17 @@ VAR veganPizza_value = 16
 VAR cheesePizza_value = 32
 VAR pepperoniPizza_value = 64
 VAR anchovyPizza_value = 64
-VAR friedEgg_value = 8
-VAR friesWithKetchup_value = 4
-VAR candyCherry_value = 8
+VAR friedEgg_value = 12
+VAR friesWithKetchup_value = 24
+VAR candyCherry_value = 12
 VAR cheeseSandwich_value = 24
 VAR mushroomPizza_value = 64
 VAR cheeseyBroccoli_value = 16
-VAR cheeseSauce_value = 4
-VAR bread_value = 4
-VAR pasta_value = 8
-VAR butter_value = 2
-VAR koolAid_value = 8
+VAR cheeseSauce_value = 6
+VAR bread_value = 6
+VAR pasta_value = 12
+VAR butter_value = 6
+VAR koolAid_value = 12
 
 
 == function inventory_has(item) ==
@@ -63,139 +63,139 @@ Delicious! Have ${fishAndChips_value} # take_fishAndChips
    -> oatmeal_king
 + {inventory_has("fries")} "Try this Fries" 
 ~ score = score - fries_value
-Delicious! Have ${fries_value} # take_fries
+Hm, I prefer my fries with ketchup. Still , pretty good! Have ${fries_value} # take_fries
    -> oatmeal_king
 + {inventory_has("breadAndButter")} "Try this Bread and Butter" 
 ~ score = score - breadAndButter_value
-Delicious! Have ${breadAndButter_value} # take_breadAndButter
+A classic! Have ${breadAndButter_value} # take_breadAndButter
    -> oatmeal_king
 + {inventory_has("toastWithJam")} "Try this Toast with Jam" 
 ~ score = score - toastWithJam_value
-Delicious! Have ${toastWithJam_value} # take_toastWithJam
+Oh man my Ferryman loves Toast with Jam! Have ${toastWithJam_value} # take_toastWithJam
    -> oatmeal_king
 + {inventory_has("donut")} "Try this Donut" 
 ~ score = score - donut_value
-Delicious! Have ${donut_value} # take_donut
+Holy Donuts! Get it?? Have ${donut_value} # take_donut
    -> oatmeal_king
 + {inventory_has("chocolateDonut")} "Try this Chocolate Donut" 
 ~ score = score - chocolateDonut_value
-Delicious! Have ${chocolateDonut_value} # take_chocolateDonut
+What an upgrade! Have ${chocolateDonut_value} # take_chocolateDonut
    -> oatmeal_king
 + {inventory_has("pastryDough")} "Try this Pastry Dough" 
 ~ score = score - pastryDough_value
-Delicious! Have ${pastryDough_value} # take_pastryDough
+I guess this technically is food! Have ${pastryDough_value} # take_pastryDough
    -> oatmeal_king
 + {inventory_has("dough")} "Try this Dough" 
 ~ score = score - dough_value
-Delicious! Have ${dough_value} # take_dough
+Is this even safe to eat? Anyway, have ${dough_value} # take_dough
    -> oatmeal_king
 + {inventory_has("powderedDonut")} "Try this Powdered Donut" 
 ~ score = score - powderedDonut_value
-Delicious! Have ${powderedDonut_value} # take_powderedDonut
+Gotta dust off my fingers after this one. Have ${powderedDonut_value} # take_powderedDonut
    -> oatmeal_king
 + {inventory_has("jellyDonut")} "Try this Jelly Donut" 
 ~ score = score - jellyDonut_value
-Delicious! Have ${jellyDonut_value} # take_jellyDonut
+A little messy, but so so good! Have ${jellyDonut_value} # take_jellyDonut
    -> oatmeal_king
 + {inventory_has("cherryPie")} "Try this Cherry Pie" 
 ~ score = score - cherryPie_value
-Delicious! Have ${cherryPie_value} # take_cherryPie
+Yum! Have ${cherryPie_value} # take_cherryPie
    -> oatmeal_king
 + {inventory_has("meatPie")} "Try this Meat Pie" 
 ~ score = score - meatPie_value
-Delicious! Have ${meatPie_value} # take_meatPie
+A sweet pie is good, but you know what I really love? A fruit pie! Have ${meatPie_value} # take_meatPie
    -> oatmeal_king
 + {inventory_has("gentlebirdPie")} "Try this Gentlebird Pie" 
 ~ score = score - gentlebirdPie_value
-Delicious! Have ${gentlebirdPie_value} # take_gentlebirdPie
+I -- did you cook a sentient being into this pie? It does look scrumptious though... I can't resist -- have ${gentlebirdPie_value} # take_gentlebirdPie
    -> oatmeal_king
 + {inventory_has("potatoBread")} "Try this Potato Bread" 
 ~ score = score - potatoBread_value
-Delicious! Have ${potatoBread_value} # take_potatoBread
+Wholesome! Have ${potatoBread_value} # take_potatoBread
    -> oatmeal_king
-+ {inventory_has("chips")} "Try this Chips" 
++ {inventory_has("chips")} "Try these Chips" 
 ~ score = score - chips_value
-Delicious! Have ${chips_value} # take_chips
+Impossible to eat just one, am I right? Have ${chips_value} # take_chips
    -> oatmeal_king
 + {inventory_has("chipsAndSalsa")} "Try this Chips and Salsa" 
 ~ score = score - chipsAndSalsa_value
-Delicious! Have ${chipsAndSalsa_value} # take_chipsAndSalsa
+Spicy! Have ${chipsAndSalsa_value} # take_chipsAndSalsa
    -> oatmeal_king
 + {inventory_has("nachos")} "Try this Nachos" 
 ~ score = score - nachos_value
-Delicious! Have ${nachos_value} # take_nachos
+A prince among meals! Have ${nachos_value} # take_nachos
    -> oatmeal_king
 + {inventory_has("nachosSupreme")} "Try this Nachos Supreme" 
 ~ score = score - nachosSupreme_value
-Delicious! Have ${nachosSupreme_value} # take_nachosSupreme
+Now THIS is a meal fit for a king! Have ${nachosSupreme_value} # take_nachosSupreme
    -> oatmeal_king
 + {inventory_has("pastaWithRedSauce")} "Try this Pasta with Red Sauce" 
 ~ score = score - pastaWithRedSauce_value
-Delicious! Have ${pastaWithRedSauce_value} # take_pastaWithRedSauce
+Pretty good! Have ${pastaWithRedSauce_value} # take_pastaWithRedSauce
    -> oatmeal_king
 + {inventory_has("pastaWithChocolateSauce")} "Try this Pasta With Chocolate Sauce" 
 ~ score = score - pastaWithChocolateSauce_value
-Delicious! Have ${pastaWithChocolateSauce_value} # take_pastaWithChocolateSauce
+Inventive! Have ${pastaWithChocolateSauce_value} # take_pastaWithChocolateSauce
    -> oatmeal_king
 + {inventory_has("veganPizza")} "Try this Vegan Pizza" 
 ~ score = score - veganPizza_value
-Delicious! Have ${veganPizza_value} # take_veganPizza
+I feel like it's missing something! Have ${veganPizza_value} # take_veganPizza
    -> oatmeal_king
 + {inventory_has("cheesePizza")} "Try this Cheese Pizza" 
 ~ score = score - cheesePizza_value
-Delicious! Have ${cheesePizza_value} # take_cheesePizza
+A little plain, but definitely yummy! Have ${cheesePizza_value} # take_cheesePizza
    -> oatmeal_king
 + {inventory_has("pepperoniPizza")} "Try this Pepperoni Pizza" 
 ~ score = score - pepperoniPizza_value
-Delicious! Have ${pepperoniPizza_value} # take_pepperoniPizza
+Meaty! Have ${pepperoniPizza_value} # take_pepperoniPizza
    -> oatmeal_king
 + {inventory_has("anchovyPizza")} "Try this Anchovy Pizza" 
 ~ score = score - anchovyPizza_value
-Delicious! Have ${anchovyPizza_value} # take_anchovyPizza
+Ooh that's pretty salty huh? Have ${anchovyPizza_value} # take_anchovyPizza
    -> oatmeal_king
 + {inventory_has("friedEgg")} "Try this Fried Egg" 
 ~ score = score - friedEgg_value
-Delicious! Have ${friedEgg_value} # take_friedEgg
+Excellent! Have ${friedEgg_value} # take_friedEgg
    -> oatmeal_king
 + {inventory_has("friesWithKetchup")} "Try this Fries with Ketchup" 
 ~ score = score - friesWithKetchup_value
-Delicious! Have ${friesWithKetchup_value} # take_friesWithKetchup
+Ketchup counts as a vegetable! So does potato! Double vegetable! Have ${friesWithKetchup_value} # take_friesWithKetchup
    -> oatmeal_king
 + {inventory_has("candyCherry")} "Try this Candy Cherry" 
 ~ score = score - candyCherry_value
-Delicious! Have ${candyCherry_value} # take_candyCherry
+It tastes like chemicals! Have ${candyCherry_value} # take_candyCherry
    -> oatmeal_king
 + {inventory_has("cheeseSandwich")} "Try this Cheese Sandwich" 
 ~ score = score - cheeseSandwich_value
-Delicious! Have ${cheeseSandwich_value} # take_cheeseSandwich
+Piotr forgot to draw this one! Whoops! Have ${cheeseSandwich_value} # take_cheeseSandwich
    -> oatmeal_king
 + {inventory_has("mushroomPizza")} "Try this Mushroom Pizza" 
 ~ score = score - mushroomPizza_value
-Delicious! Have ${mushroomPizza_value} # take_mushroomPizza
+Chewy! Have ${mushroomPizza_value} # take_mushroomPizza
    -> oatmeal_king
 + {inventory_has("cheeseyBroccoli")} "Try this Cheesey Broccoli" 
 ~ score = score - cheeseyBroccoli_value
-Delicious! Have ${cheeseyBroccoli_value} # take_cheeseyBroccoli
+Healthy and delicious! Have ${cheeseyBroccoli_value} # take_cheeseyBroccoli
    -> oatmeal_king
 + {inventory_has("cheeseSauce")} "Try this Cheese Sauce" 
 ~ score = score - cheeseSauce_value
-Delicious! Have ${cheeseSauce_value} # take_cheeseSauce
+Kind of deranged to drink cheese sauce by itself right? Have ${cheeseSauce_value} # take_cheeseSauce
    -> oatmeal_king
 + {inventory_has("bread")} "Try this Bread" 
 ~ score = score - bread_value
-Delicious! Have ${bread_value} # take_bread
+Bland! Have ${bread_value} # take_bread
    -> oatmeal_king
 + {inventory_has("butter")} "Try this Butter" 
 ~ score = score - butter_value
-Delicious! Have ${butter_value} # take_butter
+I can feel my arteries clogging already! Have ${butter_value} # take_butter
    -> oatmeal_king
 + {inventory_has("pasta")} "Try this Pasta" 
 ~ score = score - pasta_value
-Delicious! Have ${pasta_value} # take_pasta
+Mama mia! Have ${pasta_value} # take_pasta
    -> oatmeal_king
 + {inventory_has("koolAid")} "Try this Kool-Aid" 
 ~ score = score - koolAid_value
-Delicious! Have ${koolAid_value} # take_koolAid
+Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAid_value} # take_koolAid
    -> oatmeal_king
 + {oatmeal_king_intro} "I'll be back with more food soon!"
     -> END
@@ -508,10 +508,21 @@ Delicious! Have ${koolAid_value} # take_koolAid
 + "Okay"
     -> END
     
-== cow ==
-- Moo
+== cow_plain ==
+- This cow makes Cream! Pretty normal!
 + "Moo"
     -> END  
+    
+== cow_sweet ==
+- This cow makes Jam! Pretty weird!
++ "Moo"
+    -> END  
+
+== cow_salty ==
+- This cow makes Tomato Sauce! Pretty... chunky!
++ "Moo"
+    -> END  
+    
 == martin ==
 - {martin_intro: \(Martin avoids your gaze\) | Oh heya mate, you a local? Sorry I’m a tad bitty lost.}
 + {!martin_intro} "Where are you trying to go?"
@@ -534,6 +545,7 @@ Delicious! Have ${koolAid_value} # take_koolAid
 - NORTH: Castle von Cake
 - EAST: Mingus Farms Creamery
 - SOUTH: Royal Vacation Tower - CONDEMNED
+- WEST: Gorgeous Coastline
 + "Got it"
     -> END
     
@@ -541,6 +553,7 @@ Delicious! Have ${koolAid_value} # take_koolAid
 - NORTH: Castle von Oatmeal
 - EAST: Mingus Farms Jampitheatre
 - SOUTH: Royal Vacation Tower
+- WEST: Gorgeous Coastline
 + "Got it"
     -> END
     
@@ -548,6 +561,7 @@ Delicious! Have ${koolAid_value} # take_koolAid
 - NORTH: Castle von Pemmican
 - EAST: Mingus Farms Marinarium
 - SOUTH: The People's Vacation Tower
+- WEST: Gorgeous Coastline
 + "Got it"
     -> END
 
@@ -682,11 +696,73 @@ Delicious! Have ${koolAid_value} # take_koolAid
 - 1 Ice Cream with Syrup
 + "Okay"
     -> END
+    
+== page_anchovy_pizza ==
+- \= Anchovy Pizza Recipe \=
+- 1 Anchovy
+- 1 Cheese Pizza
++ "Okay"
+    -> END
+    
+== page_cheesey_brocolli ==
+- \= Cheesey Brocolli Recipe \=
+- 1 Brocolli
+- 1 Cheese Sauce
++ "Okay"
+    -> END
+    
+== page_cheese_sauce ==
+- \= Cheese Sauce Recipe \=
+- 1 Cheese
+- 1 Butter
++ "Okay"
+    -> END
+
+== page_dough ==
+- \= Dough Recipe \=
+- 1 Flour
+- 1 Egg
++ "Okay"
+    -> END
+
+== page_meat_pie ==
+- \= Dough Recipe \=
+- 1 Meatball
+- 1 Pastry Dough
++ "Okay"
+    -> END
+
+== page_chips ==
+- \= Tortilla Chips Recipe \=
+- 1 Dough
+- 1 Salt
++ "Okay"
+    -> END
+    
+== page_chocolate_donut ==
+- \= Chocolate Donut Recipe \=
+- 1 Chocolate Sauce
+- 1 Donut
++ "Okay"
+    -> END
+    
+== page_nachos_supreme ==
+- \= Los Nachos Supreme Recipe \=
+- 1 Nachos
+- 1 Meatball
++ "Okay"
+    -> END
+    
+== page_butter ==
+- \= Butter Recipe \=
+- 1 Cream
++ "Okay"
+    -> END
 
 
 // tutorial
 == tutorial_cake_king ==
-- {tutorial_cake_king_intro: Well, do you have my Fish and Chips or what? \(Cake King sits at his throne, looking perfectly regal and rich as hell\)}
+- {tutorial_cake_king_intro: Well, do you have my Fish and Chips or what? | \(Cake King sits at his throne, looking perfectly regal and rich as can be\)}
 + {!tutorial_cake_king_intro} "Good morning, my liege!"
   -> tutorial_cake_king_intro
 + {inventory_has("fishAndChips")} "Here is your Fish and Chips, my liege"
@@ -728,7 +804,7 @@ Delicious! Have ${koolAid_value} # take_koolAid
 - If you're holding all the ingredients for a recipe, you'll be able to cook it!
 + "How will I know what I need?"
 - Some recipes are recorded on Recipe Pages like the one to the left of me there. 
-- If you walk up to one and press Space, you'll be able to read the recipe!
+- If you walk up to one and press Spacebar, you'll be able to read the recipe!
 + "Handy!"
 - But listen! Not all recipes are written down! You'll have to come up with some on your own
 + "Thanks for the help, Wizzy Woo"

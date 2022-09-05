@@ -232,11 +232,18 @@ public class Player : MonoBehaviour
 
 	GameObject itemGo = item.gameObject;
 	itemGo.transform.parent = this.gameObject.transform;
-	
-	Vector3 playerPosition = this.gameObject.transform.position;
-	itemGo.transform.position = new Vector3(playerPosition.x, playerPosition.y + (heldItemsCount + 1) * 1.5f, 0.0f);
 
+	this.FixInventory();
+	
 	this.UpdateInkStoryInventory();
+    }
+
+    private void FixInventory() {
+	Vector3 playerPosition = this.gameObject.transform.position;
+	for (int i = 0; i < this.gameObject.transform.childCount; i++) {
+	    Transform child = this.gameObject.transform.GetChild(i);
+	    child.position = new Vector3(playerPosition.x, playerPosition.y + (i + 1) * 1.5f, 0.0f);
+	}
     }
     
     private void Drop() {
@@ -260,7 +267,7 @@ public class Player : MonoBehaviour
     }
 
     public void ReceiveItem(string itemName) {
-	Item item = new GameObject().AddComponent<Item>();
+	MultiRealmItem item = new GameObject().AddComponent<MultiRealmItem>();
 	item.InitCreatedItem(itemName, this.currentRealm);
 
 	if (this.gameObject.transform.childCount < 3) {
@@ -276,7 +283,6 @@ public class Player : MonoBehaviour
     public void LoseItem(string itemName) {
 	Vector3 playerPosition = this.gameObject.transform.position;
 
-	int heldItemIdx = 1;
 	bool destroyedAnItem = false;
 	for (int i = 0; i < this.gameObject.transform.childCount; i++) {
 	    Transform child = this.gameObject.transform.GetChild(i);
@@ -286,12 +292,9 @@ public class Player : MonoBehaviour
 		destroyedAnItem = true;
 		continue;
 	    }
-
-	    // move inventory items to correct spot
-	    child.position = new Vector3(playerPosition.x, playerPosition.y + heldItemIdx * 1.5f, 0.0f);
-	    heldItemIdx += 1;
 	}
 
+	this.FixInventory();
 	this.UpdateInkStoryInventory();
     }
 
