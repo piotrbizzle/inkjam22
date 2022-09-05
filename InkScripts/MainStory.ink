@@ -3,10 +3,43 @@ VAR inventory_1 = ""
 VAR inventory_2 = ""
 VAR score = 100
 
-VAR fries_value = 5
-VAR fish_and_chips_value = 20
-VAR ice_cream_with_syrup_value = 5
-VAR banana_split_value = 25
+// values
+VAR fishAndChips_value = 0
+VAR fries_value = 0
+VAR breadAndButter_value = 0
+VAR toastWithJam_value = 0
+VAR donut_value = 0
+VAR chocolateDonut_value = 0
+VAR pastryDough_value = 0
+VAR dough_value = 0
+VAR powderedDonut_value = 0
+VAR jellyDonut_value = 0
+VAR cherryPie_value = 0
+VAR meatPie_value = 0
+VAR gentlebirdPie_value = 0
+VAR potatoBread_value = 0
+VAR chips_value = 0
+VAR chipsAndSalsa_value = 0
+VAR nachos_value = 0
+VAR nachosSupreme_value = 0
+VAR pastaWithRedSauce_value = 0
+VAR pastaWithChocolateSauce_value = 0
+VAR veganPizza_value = 0
+VAR cheesePizza_value = 0
+VAR pepperoniPizza_value = 0
+VAR anchovyPizza_value = 0
+VAR friedEgg_value = 0
+VAR friesWithKetchup_value = 0
+VAR candyCherry_value = 0
+VAR cheeseSandwich_value = 0
+VAR mushroomPizza_value = 0
+VAR cheeseyBroccoli_value = 0
+VAR cheeseSauce_value = 0
+VAR bread_value = 0
+VAR pasta_value = 0
+VAR butter_value = 0
+VAR koolAid_value = 0
+
 
 == function inventory_has(item) ==
 {
@@ -21,32 +54,373 @@ VAR banana_split_value = 25
 
 == oatmeal_king ==
 - {oatmeal_king_intro: {score <= 0: Fair's fair. You and your | I will not release your King until you finish paying the ransom! You still need to bring me ${score} worth of food!} | About time you showed up! If you ever want to see your precious Cake King again you'd better pay up!}
-
 + {!oatmeal_king_intro} "What are your demands?"
     -> oatmeal_king_intro
-    
-+ {inventory_has("fries")} "Try these Fries" 
+// king
++ {inventory_has("fishAndChips")} "Try this Fish and Chips" 
+~ score = score - fishAndChips_value
+Delicious! Have ${fishAndChips_value} # take_fishAndChips
+   -> oatmeal_king
++ {inventory_has("fries")} "Try this Fries" 
 ~ score = score - fries_value
-In my royal opinion, Fries exist mainly as a vehicle for Ketchup. They're just okay plain. Have ${fries_value}" # take_fries
+Delicious! Have ${fries_value} # take_fries
+   -> oatmeal_king
++ {inventory_has("breadAndButter")} "Try this Bread and Butter" 
+~ score = score - breadAndButter_value
+Delicious! Have ${breadAndButter_value} # take_breadAndButter
+   -> oatmeal_king
++ {inventory_has("toastWithJam")} "Try this Toast with Jam" 
+~ score = score - toastWithJam_value
+Delicious! Have ${toastWithJam_value} # take_toastWithJam
+   -> oatmeal_king
++ {inventory_has("donut")} "Try this Donut" 
+~ score = score - donut_value
+Delicious! Have ${donut_value} # take_donut
+   -> oatmeal_king
++ {inventory_has("chocolateDonut")} "Try this Chocolate Donut" 
+~ score = score - chocolateDonut_value
+Delicious! Have ${chocolateDonut_value} # take_chocolateDonut
+   -> oatmeal_king
++ {inventory_has("pastryDough")} "Try this Pastry Dough" 
+~ score = score - pastryDough_value
+Delicious! Have ${pastryDough_value} # take_pastryDough
+   -> oatmeal_king
++ {inventory_has("dough")} "Try this Dough" 
+~ score = score - dough_value
+Delicious! Have ${dough_value} # take_dough
+   -> oatmeal_king
++ {inventory_has("powderedDonut")} "Try this Powdered Donut" 
+~ score = score - powderedDonut_value
+Delicious! Have ${powderedDonut_value} # take_powderedDonut
+   -> oatmeal_king
++ {inventory_has("jellyDonut")} "Try this Jelly Donut" 
+~ score = score - jellyDonut_value
+Delicious! Have ${jellyDonut_value} # take_jellyDonut
+   -> oatmeal_king
++ {inventory_has("cherryPie")} "Try this Cherry Pie" 
+~ score = score - cherryPie_value
+Delicious! Have ${cherryPie_value} # take_cherryPie
+   -> oatmeal_king
++ {inventory_has("meatPie")} "Try this Meat Pie" 
+~ score = score - meatPie_value
+Delicious! Have ${meatPie_value} # take_meatPie
+   -> oatmeal_king
++ {inventory_has("gentlebirdPie")} "Try this Gentlebird Pie" 
+~ score = score - gentlebirdPie_value
+Delicious! Have ${gentlebirdPie_value} # take_gentlebirdPie
+   -> oatmeal_king
++ {inventory_has("potatoBread")} "Try this Potato Bread" 
+~ score = score - potatoBread_value
+Delicious! Have ${potatoBread_value} # take_potatoBread
+   -> oatmeal_king
++ {inventory_has("chips")} "Try this Chips" 
+~ score = score - chips_value
+Delicious! Have ${chips_value} # take_chips
+   -> oatmeal_king
++ {inventory_has("chipsAndSalsa")} "Try this Chips and Salsa" 
+~ score = score - chipsAndSalsa_value
+Delicious! Have ${chipsAndSalsa_value} # take_chipsAndSalsa
+   -> oatmeal_king
++ {inventory_has("nachos")} "Try this Nachos" 
+~ score = score - nachos_value
+Delicious! Have ${nachos_value} # take_nachos
+   -> oatmeal_king
++ {inventory_has("nachosSupreme")} "Try this Nachos Supreme" 
+~ score = score - nachosSupreme_value
+Delicious! Have ${nachosSupreme_value} # take_nachosSupreme
+   -> oatmeal_king
++ {inventory_has("pastaWithRedSauce")} "Try this Pasta with Red Sauce" 
+~ score = score - pastaWithRedSauce_value
+Delicious! Have ${pastaWithRedSauce_value} # take_pastaWithRedSauce
+   -> oatmeal_king
++ {inventory_has("pastaWithChocolateSauce")} "Try this Pasta With Chocolate Sauce" 
+~ score = score - pastaWithChocolateSauce_value
+Delicious! Have ${pastaWithChocolateSauce_value} # take_pastaWithChocolateSauce
+   -> oatmeal_king
++ {inventory_has("veganPizza")} "Try this Vegan Pizza" 
+~ score = score - veganPizza_value
+Delicious! Have ${veganPizza_value} # take_veganPizza
+   -> oatmeal_king
++ {inventory_has("cheesePizza")} "Try this Cheese Pizza" 
+~ score = score - cheesePizza_value
+Delicious! Have ${cheesePizza_value} # take_cheesePizza
+   -> oatmeal_king
++ {inventory_has("pepperoniPizza")} "Try this Pepperoni Pizza" 
+~ score = score - pepperoniPizza_value
+Delicious! Have ${pepperoniPizza_value} # take_pepperoniPizza
+   -> oatmeal_king
++ {inventory_has("anchovyPizza")} "Try this Anchovy Pizza" 
+~ score = score - anchovyPizza_value
+Delicious! Have ${anchovyPizza_value} # take_anchovyPizza
+   -> oatmeal_king
++ {inventory_has("friedEgg")} "Try this Fried Egg" 
+~ score = score - friedEgg_value
+Delicious! Have ${friedEgg_value} # take_friedEgg
+   -> oatmeal_king
++ {inventory_has("friesWithKetchup")} "Try this Fries with Ketchup" 
+~ score = score - friesWithKetchup_value
+Delicious! Have ${friesWithKetchup_value} # take_friesWithKetchup
+   -> oatmeal_king
++ {inventory_has("candyCherry")} "Try this Candy Cherry" 
+~ score = score - candyCherry_value
+Delicious! Have ${candyCherry_value} # take_candyCherry
+   -> oatmeal_king
++ {inventory_has("cheeseSandwich")} "Try this Cheese Sandwich" 
+~ score = score - cheeseSandwich_value
+Delicious! Have ${cheeseSandwich_value} # take_cheeseSandwich
+   -> oatmeal_king
++ {inventory_has("mushroomPizza")} "Try this Mushroom Pizza" 
+~ score = score - mushroomPizza_value
+Delicious! Have ${mushroomPizza_value} # take_mushroomPizza
+   -> oatmeal_king
++ {inventory_has("cheeseyBroccoli")} "Try this Cheesey Broccoli" 
+~ score = score - cheeseyBroccoli_value
+Delicious! Have ${cheeseyBroccoli_value} # take_cheeseyBroccoli
+   -> oatmeal_king
++ {inventory_has("cheeseSauce")} "Try this Cheese Sauce" 
+~ score = score - cheeseSauce_value
+Delicious! Have ${cheeseSauce_value} # take_cheeseSauce
+   -> oatmeal_king
++ {inventory_has("bread")} "Try this Bread" 
+~ score = score - bread_value
+Delicious! Have ${bread_value} # take_bread
+   -> oatmeal_king
++ {inventory_has("butter")} "Try this Butter" 
+~ score = score - butter_value
+Delicious! Have ${butter_value} # take_butter
+   -> oatmeal_king
++ {inventory_has("pasta")} "Try this Pasta" 
+~ score = score - pasta_value
+Delicious! Have ${pasta_value} # take_pasta
+   -> oatmeal_king
++ {inventory_has("koolAid")} "Try this Kool-Aid" 
+~ score = score - koolAid_value
+Delicious! Have ${koolAid_value} # take_koolAid
+   -> oatmeal_king
++ {oatmeal_king_intro} "I'll be back with more food soon!"
+    -> END
+
+// cooker
+== cooker ==
+- You fire up the ol' cooker! Time to make some food! 
+// cookerIn
++ {inventory_has("fish") && inventory_has("fries")} Fish and Chips (Retail Value: ${fishAndChips_value})
+    -> cooker_fishAndChips
++ {inventory_has("oil") && inventory_has("potato")} Fries (Retail Value: ${fries_value})
+    -> cooker_fries
++ {inventory_has("bread") && inventory_has("butter")} Bread and Butter (Retail Value: ${breadAndButter_value})
+    -> cooker_breadAndButter
++ {inventory_has("bread") && inventory_has("jam")} Toast with Jam (Retail Value: ${toastWithJam_value})
+    -> cooker_toastWithJam
++ {inventory_has("pastryDough") && inventory_has("oil")} Donut (Retail Value: ${donut_value})
+    -> cooker_donut
++ {inventory_has("donut") && inventory_has("chocolateSyrup")} Chocolate Donut (Retail Value: ${chocolateDonut_value})
+    -> cooker_chocolateDonut
++ {inventory_has("dough") && inventory_has("butter")} Pastry Dough (Retail Value: ${pastryDough_value})
+    -> cooker_pastryDough
++ {inventory_has("flour") && inventory_has("egg")} Dough (Retail Value: ${dough_value})
+    -> cooker_dough
++ {inventory_has("donut") && inventory_has("sugar")} Powdered Donut (Retail Value: ${powderedDonut_value})
+    -> cooker_powderedDonut
++ {inventory_has("jam") && inventory_has("donut")} Jelly Donut (Retail Value: ${jellyDonut_value})
+    -> cooker_jellyDonut
++ {inventory_has("pastryDough") && inventory_has("cherry")} Cherry Pie (Retail Value: ${cherryPie_value})
+    -> cooker_cherryPie
++ {inventory_has("pastryDough") && inventory_has("meatball")} Meat Pie (Retail Value: ${meatPie_value})
+    -> cooker_meatPie
++ {inventory_has("martin") && inventory_has("pastryDough")} Gentlebird Pie (Retail Value: ${gentlebirdPie_value})
+    -> cooker_gentlebirdPie
++ {inventory_has("potato") && inventory_has("bread")} Potato Bread (Retail Value: ${potatoBread_value})
+    -> cooker_potatoBread
++ {inventory_has("dough") && inventory_has("salt")} Chips (Retail Value: ${chips_value})
+    -> cooker_chips
++ {inventory_has("chips") && inventory_has("hotSauce")} Chips and Salsa (Retail Value: ${chipsAndSalsa_value})
+    -> cooker_chipsAndSalsa
++ {inventory_has("chips") && inventory_has("cheeseSauce")} Nachos (Retail Value: ${nachos_value})
+    -> cooker_nachos
++ {inventory_has("nachos") && inventory_has("meatball")} Nachos Supreme (Retail Value: ${nachosSupreme_value})
+    -> cooker_nachosSupreme
++ {inventory_has("pasta") && inventory_has("marinara")} Pasta with Red Sauce (Retail Value: ${pastaWithRedSauce_value})
+    -> cooker_pastaWithRedSauce
++ {inventory_has("pasta") && inventory_has("chocolateSyrup")} Pasta With Chocolate Sauce (Retail Value: ${pastaWithChocolateSauce_value})
+    -> cooker_pastaWithChocolateSauce
++ {inventory_has("dough") && inventory_has("marinara")} Vegan Pizza (Retail Value: ${veganPizza_value})
+    -> cooker_veganPizza
++ {inventory_has("veganPizza") && inventory_has("cheese")} Cheese Pizza (Retail Value: ${cheesePizza_value})
+    -> cooker_cheesePizza
++ {inventory_has("cheesePizza") && inventory_has("meatball")} Pepperoni Pizza (Retail Value: ${pepperoniPizza_value})
+    -> cooker_pepperoniPizza
++ {inventory_has("cheesePizza") && inventory_has("anchovy")} Anchovy Pizza (Retail Value: ${anchovyPizza_value})
+    -> cooker_anchovyPizza
++ {inventory_has("egg") && inventory_has("oil")} Fried Egg (Retail Value: ${friedEgg_value})
+    -> cooker_friedEgg
++ {inventory_has("fries") && inventory_has("marinara")} Fries with Ketchup (Retail Value: ${friesWithKetchup_value})
+    -> cooker_friesWithKetchup
++ {inventory_has("cherry") && inventory_has("sugar")} Candy Cherry (Retail Value: ${candyCherry_value})
+    -> cooker_candyCherry
++ {inventory_has("cheese") && inventory_has("bread")} Cheese Sandwich (Retail Value: ${cheeseSandwich_value})
+    -> cooker_cheeseSandwich
++ {inventory_has("mushroom") && inventory_has("cheesePizza")} Mushroom Pizza (Retail Value: ${mushroomPizza_value})
+    -> cooker_mushroomPizza
++ {inventory_has("broccoli") && inventory_has("cheeseSauce")} Cheesey Broccoli (Retail Value: ${cheeseyBroccoli_value})
+    -> cooker_cheeseyBroccoli
++ {inventory_has("cheese") && inventory_has("butter")} Cheese Sauce (Retail Value: ${cheeseSauce_value})
+    -> cooker_cheeseSauce
++ {inventory_has("flour")} Bread (Retail Value: ${bread_value})
+    -> cooker_bread
++ {inventory_has("cream")} Butter (Retail Value: ${butter_value})
+    -> cooker_butter
++ {inventory_has("dough")} Pasta (Retail Value: ${pasta_value})
+    -> cooker_pasta
++ {inventory_has("popsicle")} Kool-Aid (Retail Value: ${koolAid_value})
+    -> cooker_koolAid
+
++ Cook nothing
     -> END
     
-+ {inventory_has("fish_and_chips")} "Try this Fish and Chips" 
-~ score = score - fish_and_chips_value
-No newspaper to wrap it in? How will I learn about current events? Still, pretty tasty. Have ${fish_and_chips_value}" # take_fish_and_chips
+// cookerOut
+== cooker_fishAndChips ==
+- You made Fish and Chips! # take_fish # take_fries # give_fishAndChips
++ Nice
+     -> END
+== cooker_fries ==
+- You made Fries! # take_oil # take_potato # give_fries
++ Nice
+     -> END
+== cooker_breadAndButter ==
+- You made Bread and Butter! # take_bread # take_butter # give_breadAndButter
++ Nice
+     -> END
+== cooker_toastWithJam ==
+- You made Toast with Jam! # take_bread # take_jam # give_toastWithJam
++ Nice
+     -> END
+== cooker_donut ==
+- You made Donut! # take_pastryDough # take_oil # give_donut
++ Nice
+     -> END
+== cooker_chocolateDonut ==
+- You made Chocolate Donut! # take_donut # take_chocolateSyrup # give_chocolateDonut
++ Nice
+     -> END
+== cooker_pastryDough ==
+- You made Pastry Dough! # take_dough # take_butter # give_pastryDough
++ Nice
+     -> END
+== cooker_dough ==
+- You made Dough! # take_flour # take_egg # give_dough
++ Nice
+     -> END
+== cooker_powderedDonut ==
+- You made Powdered Donut! # take_donut # take_sugar # give_powderedDonut
++ Nice
+     -> END
+== cooker_jellyDonut ==
+- You made Jelly Donut! # take_jam # take_donut # give_jellyDonut
++ Nice
+     -> END
+== cooker_cherryPie ==
+- You made Cherry Pie! # take_pastryDough # take_cherry # give_cherryPie
++ Nice
+     -> END
+== cooker_meatPie ==
+- You made Meat Pie! # take_pastryDough # take_meatball # give_meatPie
++ Nice
+     -> END
+== cooker_gentlebirdPie ==
+- You made Gentlebird Pie! # take_martin # take_pastryDough # give_gentlebirdPie
++ Nice
+     -> END
+== cooker_potatoBread ==
+- You made Potato Bread! # take_potato # take_bread # give_potatoBread
++ Nice
     -> END
-    
-+ {inventory_has("ice_cream_with_syrup")} "Try this Ice Cream with Syrup" 
-~ score = score - ice_cream_with_syrup_value
-Why don't we ever put Chocolate Syrup on other stuff, like a nice pasta? It's such an underrated condiment. Have ${ice_cream_with_syrup_value}" # take_ice_cream_with_syrup
-    -> END
-    
-+ {inventory_has("banana_split")} "Try this Banana Split" 
-~ score = score - banana_split_value
-Oh man, My Royal Wizard loves these! He's out on a research expedition right now, though. Have ${banana_split_value}" # take_banana_split
-    -> END
-    
-+ "I'll be back with more food soon!"
-    -> END
+== cooker_chips ==
+- You made Chips! # take_dough # take_salt # give_chips
++ Nice
+     -> END
+== cooker_chipsAndSalsa ==
+- You made Chips and Salsa! # take_chips # take_hotSauce # give_chipsAndSalsa
++ Nice
+     -> END
+== cooker_nachos ==
+- You made Nachos! # take_chips # take_cheeseSauce # give_nachos
++ Nice
+     -> END
+== cooker_nachosSupreme ==
+- You made Nachos Supreme! # take_nachos # take_meatball # give_nachosSupreme
++ Nice
+     -> END
+== cooker_pastaWithRedSauce ==
+- You made Pasta with Red Sauce! # take_pasta # take_marinara # give_pastaWithRedSauce
++ Nice
+     -> END
+== cooker_pastaWithChocolateSauce ==
+- You made Pasta With Chocolate Sauce! # take_pasta # take_chocolateSyrup # give_pastaWithChocolateSauce
++ Nice
+     -> END
+== cooker_veganPizza ==
+- You made Vegan Pizza! # take_dough # take_marinara # give_veganPizza
++ Nice
+     -> END
+== cooker_cheesePizza ==
+- You made Cheese Pizza! # take_veganPizza # take_cheese # give_cheesePizza
++ Nice
+     -> END
+== cooker_pepperoniPizza ==
+- You made Pepperoni Pizza! # take_cheesePizza # take_meatball # give_pepperoniPizza
++ Nice
+     -> END
+== cooker_anchovyPizza ==
+- You made Anchovy Pizza! # take_cheesePizza # take_anchovy # give_anchovyPizza
++ Nice
+     -> END
+== cooker_friedEgg ==
+- You made Fried Egg! # take_egg # take_oil # give_friedEgg
++ Nice
+     -> END
+== cooker_friesWithKetchup ==
+- You made Fries with Ketchup! # take_fries # take_marinara # give_friesWithKetchup
++ Nice
+     -> END
+== cooker_candyCherry ==
+- You made Candy Cherry! # take_cherry # take_sugar # give_candyCherry
++ Nice
+     -> END
+== cooker_cheeseSandwich ==
+- You made Cheese Sandwich! # take_cheese # take_bread # give_cheeseSandwich
++ Nice
+     -> END
+== cooker_mushroomPizza ==
+- You made Mushroom Pizza! # take_mushroom # take_cheesePizza # give_mushroomPizza
++ Nice
+     -> END
+== cooker_cheeseyBroccoli ==
+- You made Cheesey Broccoli! # take_broccoli # take_cheeseSauce # give_cheeseyBroccoli
++ Nice
+     -> END
+== cooker_cheeseSauce ==
+- You made Cheese Sauce! # take_cheese # take_butter # give_cheeseSauce
++ Nice
+     -> END
+== cooker_bread ==
+- You made Bread! # take_flour # give_bread
++ Nice
+     -> END
+== cooker_butter ==
+- You made Butter! # take_cream # give_butter
++ Nice
+     -> END
+== cooker_pasta ==
+- You made Pasta! # take_dough # give_pasta
++ Nice
+     -> END
+== cooker_koolAid ==
+- You made Kool-Aid! # take_popsicle # give_koolAid
++ Nice
+     -> END
+
+
     
 == oatmeal_king_intro ==
 - \(Oatmeal Raisin King distractedly picks at one his his raisins\)
@@ -157,10 +531,10 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
   -> END
 
 == ferryman ==
-- {ferryman_complete: Ready to cross the lake / sea? | {ferryman_intro: Do you have my Peanut Butter and Jelly Sandwich? | Why hello there! I. AM. THE. FERRYMAN! I help travelers sail from shore to shining shore. You, my good man, look like a box in need of a ride!}}
+- {ferryman_complete: Ready to cross the lake / sea? | {ferryman_intro: Do you have my Toast with Jam? | Why hello there! I. AM. THE. FERRYMAN! I help travelers sail from shore to shining shore. You, my good man, look like a box in need of a ride!}}
 + {!ferryman_intro} “I’m the royal chef, not a box.”
     -> ferryman_intro
-+ {ferryman_intro && !ferryman_complete && inventory_has("peanutButterAndJellySandwich")} "Right here! Will you take me aboard your boat?.
++ {ferryman_intro && !ferryman_complete && inventory_has("toastWithJam")} "Right here! Will you take me aboard your boat?.
     ->  ferryman_complete
 + {ferryman_complete} "Let's do it!"
     -> ferryman_cross
@@ -176,12 +550,12 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
 + No.
 - Harrumph… well it was worth a shot. Let’s see, perhaps we can come to another arrangement. I have a particular craving. A desire if you will. A need for a yum yum in my tum tum. What do you say?
 + Ummm, gross. What do you want me to make you?
-- Bring me a Peanut Butter and Jelly sandwich, Then I’ll take you and your silly chef hat across this chocolately lake.
-+ Okay. I guess I'll go make a Peanut Butter and Jelly sandwich.
+- Bring me a nice piece of Toast with Jam, Then I’ll take you and your silly chef hat across the lake.
++ Okay. I guess I'll go make some Toast with Jam.
     -> END
 
 == ferryman_complete ==
-- Anchors aweigh!  # take_peanutButterAndJellySandwich # send_to_island|1.1|0.25
+- Anchors aweigh!  # take_toastWithJam # send_to_island|1.1|0.25
 + "Ahoy!"
     -> END
     
@@ -203,15 +577,15 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
     -> END
     
 == fenix ==
-- {fenix_intro: \(The Phoenix seems bored of talking to you\) | \(The Phoenix glances at you, disinterestedly. Her vest is incredibly sweet\)"}
+- {fenix_intro: \(The Phoenix seems tired of talking to you\) | \(The Phoenix glances at you, disinterestedly. Her vest is incredibly sweet\)"}
 + {!fenix_intro} "Excuse me"
     -> fenix_intro
 + {fenix_intro} Leave her be
     -> END
 
 == fenix_intro ==
-- \(The Phoenix is still looking over the balcony, but you're pretty sure she's listening\)
-+ "Where is your King? I noticed the throneroom is empty?"
+- \(She doesn't stop looking over the balcony, but you're pretty sure she's listening\)
++ "Where is your King? I noticed the throneroom is empty"
 - ...
 + "..?"
 - \(She sighs like a cool person\) 
@@ -287,40 +661,7 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
 - 1 Ice Cream with Syrup
 + "Okay"
     -> END
-    
-// cooker
-== cooker ==
-- You fire up the ol' cooker! Time to make some food! 
-+ {inventory_has("potato") && inventory_has("oil")} Fries (Retail Value: ${fries_value})
-    -> cooker_fries
-+ {inventory_has("fries") && inventory_has("fish")} Fish and Chips (Retail Value: ${fish_and_chips_value})
-    -> cooker_fish_and_chips
-+ {inventory_has("iceCream") && inventory_has("chocolateSyrup")} Ice Cream with Syrup (Retail Value: ${ice_cream_with_syrup_value}) 
-    -> cooker_ice_cream_with_syrup
-+ {inventory_has("iceCreamWithSyrup") && inventory_has("banana")} Banana Split (Retail Value: ${banana_split_value})
-    -> cooker_banana_split
-+ Cook nothing
-    -> END
-    
-== cooker_fries ==
-- You made some fries! Greasy! # take_potato # take_oil # give_fries
-+ Nice
-    -> END
 
-== cooker_fish_and_chips ==
-- You made some fish and chips! How positively English of you! # take_fries # take_fish # give_fishAndChips
-+ Nice
-    -> END
-    
-== cooker_ice_cream_with_syrup ==
-- You made some Ice Cream with Syrup! Decadent! # take_iceCream # take_chocolateSyrup # give_iceCreamWithSyrup
-+ Nice
-    -> END
-    
-== cooker_banana_split ==
-- You made a Banana Split! It's healthy now! # take_iceCreamWithSyrup # take_banana # give_bananaSplit
-+ Nice
-    -> END
 
 // tutorial
 == tutorial_cake_king ==
@@ -351,7 +692,7 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
 - \(A kingly figure made of Oatmeal Raisin dough emerges from the shadows and holds a knife to Cake King's throat\)
 - I'm taking your big idiot king hostage! If you ever want to see him again, come find me in THE SWEETYVERSE. I'll be waiting...
 + "THE SWEETYVERSE???"
--  \(The mysterious interloper steps through a purple portal, taking Cake King with him!\) # send_to_throneRoomTut|0
+-  \(The interloper drags Cake King out of the throne room and over the balcony\) # send_to_throneRoomTut|0
 + "Alas!"
     -> END
     
