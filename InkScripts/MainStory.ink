@@ -4,41 +4,41 @@ VAR inventory_2 = ""
 VAR score = 100
 
 // values
-VAR fishAndChips_value = 12
-VAR fries_value = 6
-VAR breadAndButter_value = 16
-VAR toastWithJam_value = 12
-VAR donut_value = 12
-VAR chocolateDonut_value = 16
-VAR pastryDough_value = 6
-VAR dough_value = 4
-VAR powderedDonut_value = 16
-VAR jellyDonut_value = 16
-VAR cherryPie_value = 32
-VAR meatPie_value = 64
+VAR fishAndChips_value = 28
+VAR fries_value = 12
+VAR breadAndButter_value = 20
+VAR toastWithJam_value = 24
+VAR donut_value = 32
+VAR chocolateDonut_value = 42
+VAR pastryDough_value = 20
+VAR dough_value = 12
+VAR powderedDonut_value = 38
+VAR jellyDonut_value = 40
+VAR cherryPie_value = 30
+VAR meatPie_value = 32
 VAR gentlebirdPie_value = 69
-VAR potatoBread_value = 12
-VAR chips_value = 16
-VAR chipsAndSalsa_value = 32
-VAR nachos_value = 32
-VAR nachosSupreme_value = 64
-VAR pastaWithRedSauce_value = 32
-VAR pastaWithChocolateSauce_value = 32
-VAR veganPizza_value = 16
-VAR cheesePizza_value = 32
-VAR pepperoniPizza_value = 64
-VAR anchovyPizza_value = 64
-VAR friedEgg_value = 12
-VAR friesWithKetchup_value = 24
-VAR candyCherry_value = 12
-VAR cheeseSandwich_value = 24
-VAR mushroomPizza_value = 64
-VAR cheeseyBroccoli_value = 16
-VAR cheeseSauce_value = 6
-VAR bread_value = 6
-VAR pasta_value = 12
-VAR butter_value = 6
-VAR koolAid_value = 12
+VAR potatoBread_value = 15
+VAR chips_value = 21
+VAR chipsAndSalsa_value = 31
+VAR nachos_value = 36
+VAR nachosSupreme_value = 45
+VAR pastaWithRedSauce_value = 25
+VAR pastaWithChocolateSauce_value = 29
+VAR veganPizza_value = 22
+VAR cheesePizza_value = 36
+VAR pepperoniPizza_value = 44
+VAR anchovyPizza_value = 48
+VAR friedEgg_value = 13
+VAR friesWithKetchup_value = 21
+VAR candyCherry_value = 16
+VAR cheeseSandwich_value = 17
+VAR mushroomPizza_value = 47
+VAR cheeseyBroccoli_value = 35
+VAR cheeseSauce_value = 13
+VAR bread_value = 8
+VAR pasta_value = 17
+VAR butter_value = 8
+VAR koolAid_value = 15
 
 
 == function inventory_has(item) ==
@@ -53,7 +53,7 @@ VAR koolAid_value = 12
     ~ return false
 
 == oatmeal_king ==
-- {oatmeal_king_intro: {score <= 0: Fair's fair. You and your | I will not release your King until you finish paying the ransom! You still need to bring me ${score} worth of food!} | About time you showed up! If you ever want to see your precious Cake King again you'd better pay up!}
+- {oatmeal_king_intro: {score <= 0: Wow, you actually paid the whole ransom! | I will not release your King until you finish paying the ransom! You still need to bring me ${score} worth of food!} | About time you showed up! If you ever want to see your precious Cake King again you'd better pay up!}
 + {!oatmeal_king_intro} "What are your demands?"
     -> oatmeal_king_intro
 // king
@@ -167,7 +167,7 @@ It tastes like chemicals! Have ${candyCherry_value} # take_candyCherry
    -> oatmeal_king
 + {inventory_has("cheeseSandwich")} "Try this Cheese Sandwich" 
 ~ score = score - cheeseSandwich_value
-Piotr forgot to draw this one! Whoops! Have ${cheeseSandwich_value} # take_cheeseSandwich
+More of a snack than a meal, but still good. Have ${cheeseSandwich_value} # take_cheeseSandwich
    -> oatmeal_king
 + {inventory_has("mushroomPizza")} "Try this Mushroom Pizza" 
 ~ score = score - mushroomPizza_value
@@ -197,6 +197,8 @@ Mama mia! Have ${pasta_value} # take_pasta
 ~ score = score - koolAid_value
 Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAid_value} # take_koolAid
    -> oatmeal_king
++ {score <= 0} Yeah I did! Now let Cake King go!
+    -> oatmeal_king_ending
 + {oatmeal_king_intro} "I'll be back with more food soon!"
     -> END
 
@@ -437,9 +439,9 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     -> END
     
 == oatmeal_king_ending ==
-- Well, you've payed my ransom in delicious delicacies, but if you think I’ll actually let your pathetic lump of a king free then you are but a fool! Let me tell you why this little loaf is in that cell
+- If you think I’ll actually let your pathetic lump of a king free then you are but a fool! Let me tell you why this little loaf is in that cell
 + "But you said if I paid the ransom he would be freed!"
-- I told but a white lie. Long ago, I was a kind and generous king in your universe. I truly cared for my people, providing free housing for all. 
+- Listen! Long ago, I was a kind and generous king in your universe. I truly cared for my people, providing free housing for all. 
 - But do you know what Cake King wanted, what he did!?
 + What???
 - Somehow, his wizard learned how to open a door from THE SWEETYVERSE dimension to our own BLANDYVERSE. He saw our universe's fine dough and desired it for himself! 
@@ -451,6 +453,8 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 - Only Cake King's Royal Wizard knew the secret of portal travel, so I had to task all of my court magicians to rediscover the technique. They only just cracked it this morning!
 + "You mean Wizzy Woo is from THE SWEETYVERSE?"
 - Wizzy Woo? Is that your universe's Wheezy Wee?
++ "I think so"
+- No no, Cake King's ORIGINAL Royal Wizard. I heard he was a Gentlebird, and that he's been hiding out in THE BLANDYVERSE under deep cover as some kind of potato farmer.
 - Come to think of it, I wonder why he hasn't come to rescue Cake King? 
 + "It's truly a mystery"
 - You need to understand, Cake King is a monster! I heard how he forced you into a dangerous rent situation last year.
@@ -458,11 +462,36 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 + "I see what you mean"
 - But, you did pay my ransom as agreed. So I put it up to you:
 - If you leave Cake King locked up and let me bring both THE BLANDYVERSE and THE SWEETYVERSE under my benevolent rule, I will offer you the finest kitchen-apartment my Royal Architects can construct and the freedom to cook whatever you like
-- OR You can free Cake King, in which case both of you are exiled from THE SWEETYVERSE forever.
+- OR 
+- You can free Cake King, in which case both of you are exiled from THE SWEETYVERSE forever.
 + You are right, Cake King has mistreated me, I'll take your offer
-  -> END
+  -> epilogue_a
 + I'll not side with a blasphemous kidnapper like you! Free Cake King!
-  -> END
+  -> epilogue_b
+  
+== epilogue_a ==
+- \(And so, Oatmeal Raisin King kept Cake King in permanent confinement. The BLANDYVERSE and SWEETYVERSE both thrived under his kingsmanship\)
+- \(The Royal Chef opened a sweet restaurant for yuppies in THE BLANDYVERSE and earned tons of cash. Between the business revenue and his free apartment, the Royal Chef never worried about money again\)
+- \(But somehow, deep in the Royal Chef's heart, he knew this was not The Canon Ending\)
+- \~THE END\~
++ Credits?
+    -> the_end
+
+== epilogue_b ==
+- \(True to his word, Oatmeal Raisin King let Cake King free and used the ransom money to fund anti-portal research. Within a few months, THE BLANDYVERSE and THE SWEETYVERSE were once again totally cut off\)
+- \(The Royal Chef returned to working for Cake King, who continued to charge The Royal Chef monthly rent to live in the kitchen\)
+- \(Somehow, deep in the Royal Chef's heart, he knew this was The Canon Ending\)
+- \~THE END\~
++ Credits?
+    -> the_end
+
+
+== the_end ==
+- CAKE KING II: A KING'S RANSOM
+- Made for the InkJam 2022 by Piotrbizzle
+- With lots of help from the community, especially TheRealRangoette, dendanskemand, and nootls. Thank you to everyone who pitched in <3 
++ Nice.
+    -> the_end
 
 == knight_plain ==
 - This tower has been permanently closed for safety reasons! It could crumble at any second!
@@ -534,8 +563,8 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 - The name’s Martin, Martin the Purple Workingbird, despite my plumage being blue now, it blooms into a mix of purple and blue once spring be coming round.
 + "Fascinating!"
 - See I’ve come here to pay respects to me brothers death, he used to own the farm round here. Lookin for it ya see. 
-+ "The farm's just to the East of here, o sorry for your loss"
-- He was killed last yea by the weirded looking fella by the descriptions -- chefs hat, dark as shadow, blue eyes that pierce your bloody soul, a villainous looking moustache and shaped like a short rectang-
++ "The farm's just to the East of here, so sorry for your loss"
+- He was killed last year by the weirdest looking fella by the descriptions -- chefs hat, dark as shadow, blue eyes that pierce your bloody soul, a villainous looking moustache and shaped like a short rectang-
 + "..."
 - You know, I just realized I'm in an awful hurry. Th-thanks for the directions, stranger, I'll be on my way.
 + "..."
@@ -821,7 +850,7 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 - Raw ingredients carried through the portal change to become their parallel universe counterpart. 
 - For example, that bottle of Oil on my desk turns into Chocolate Syrup in THE SWEETYVERSE.
 + "How strange!"
-- BUT, prepared dishes seem to only exist in one universe at a time. If you prepare something in your Cooker and carry it through a portal, it won't change!
+- BUT, prepared dishes seem to only have a single form across both universes. If you prepare something in your Cooker and carry it through a portal, it won't change!
 + "How mysterious!"
 - I know that's a lot to take in. Before I can let you loose to find Cake King, I need to know you understand the strange mysteriousness of portals.
 - Why don't you make me a nice Banana Split? Everything you need should be in this castle.

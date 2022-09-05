@@ -162,21 +162,7 @@ public class Player : MonoBehaviour
     	    this.currentZone.SetRealm(this.currentRealm);    
     }
 
-    private void Act() {
-	// debug
-	bool mPressed = Input.GetKey("m");
-	if (mPressed && !this.mHeld) {
-	    this.inkStory.DebugInventory();
-	}
-	this.mHeld = mPressed;
-
-	bool lPressed = Input.GetKey("l");
-	if (lPressed && !this.lHeld) {
-	    int nextRealm = this.currentRealm == 3 ? 0 : this.currentRealm + 1;
-	    this.SetRealm(nextRealm);
-	}
-	this.lHeld = lPressed;
-	
+    private void Act() {	
 	// pick up item
 	this.eHeld = Input.GetKey("e");
 
