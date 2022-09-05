@@ -3,6 +3,7 @@ VAR inventory_1 = ""
 VAR inventory_2 = ""
 VAR score = 100
 
+VAR cow_fullness = 3
 VAR fries_value = 5
 VAR fish_and_chips_value = 20
 VAR ice_cream_with_syrup_value = 5
@@ -135,8 +136,48 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
     -> END
     
 == cow ==
-- Moo
-+ "Moo"
+- \(Milk the Cow?\)
++ {cow_fullness > 0} "Of course!"
+    -> cow_cream
++ {cow_fullness > 0} "Maybe another time"
+    -> END
++ {cow_fullness <=  0} "This Cow is all dried up!
+    -> END
+
+== cow_cream ==
+- Moo # give_cream
++ \(The Cow dispenses some Cream for you\)
+    ~ cow_fullness = cow_fullness - 1
+    -> END
+    
+== cow_sweet ==
+- \(Milk the Cow?\)
++ {cow_fullness > 0} "Of course!"
+    -> cow_jam
++ {cow_fullness > 0} "Maybe another time"
+    -> END
++ {cow_fullness <=  0} "This Cow is all dried up!
+    -> END
+
+== cow_jam ==
+- Moo # give_jam
++ \(The Jelly Cow dispenses some Jam for you\) 
+    ~ cow_fullness = cow_fullness - 1
+    -> END
+    
+== cow_salty ==
+- \(Milk the Cow?\)
++ {cow_fullness > 0} "Of course!"
+    -> cow_marinara
++ {cow_fullness > 0} "Maybe another time"
+    -> END
++ {cow_fullness <=  0} "This Cow is all dried up!"
+    -> END
+    
+== cow_marinara ==
+- Moo # give_marinara
++ \(The Pasta Cow dispenses some Marinara Sauce for you\)
+    ~ cow_fullness = cow_fullness - 1
     -> END
     
 == martin ==
