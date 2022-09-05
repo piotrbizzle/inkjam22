@@ -3,7 +3,6 @@ VAR inventory_1 = ""
 VAR inventory_2 = ""
 VAR score = 100
 
-VAR cow_fullness = 3
 VAR fries_value = 5
 VAR fish_and_chips_value = 20
 VAR ice_cream_with_syrup_value = 5
@@ -136,50 +135,9 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
     -> END
     
 == cow ==
-- \(Milk the Cow?\)
-+ {cow_fullness > 0} "Of course!"
-    -> cow_cream
-+ {cow_fullness > 0} "Maybe another time"
-    -> END
-+ {cow_fullness <=  0} "This Cow is all dried up!
-    -> END
-
-== cow_cream ==
-- Moo # give_cream
-+ \(The Cow dispenses some Cream for you\)
-    ~ cow_fullness = cow_fullness - 1
-    -> END
-    
-== cow_sweet ==
-- \(Milk the Cow?\)
-+ {cow_fullness > 0} "Of course!"
-    -> cow_jam
-+ {cow_fullness > 0} "Maybe another time"
-    -> END
-+ {cow_fullness <=  0} "This Cow is all dried up!
-    -> END
-
-== cow_jam ==
-- Moo # give_jam
-+ \(The Jelly Cow dispenses some Jam for you\) 
-    ~ cow_fullness = cow_fullness - 1
-    -> END
-    
-== cow_salty ==
-- \(Milk the Cow?\)
-+ {cow_fullness > 0} "Of course!"
-    -> cow_marinara
-+ {cow_fullness > 0} "Maybe another time"
-    -> END
-+ {cow_fullness <=  0} "This Cow is all dried up!"
-    -> END
-    
-== cow_marinara ==
-- Moo # give_marinara
-+ \(The Pasta Cow dispenses some Marinara Sauce for you\)
-    ~ cow_fullness = cow_fullness - 1
-    -> END
-    
+- Moo
++ "Moo"
+    -> END  
 == martin ==
 - {martin_intro: \(Martin avoids your gaze\) | Oh heya mate, you a local? Sorry I’m a tad bitty lost.}
 + {!martin_intro} "Where are you trying to go?"
@@ -245,8 +203,20 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
     -> END
     
 == fenix ==
-- \(The Phoenix glances at you, boredly. His vest is incredibly sweet\)"
-+ "What a cool guy"
+- {fenix_intro: \(The Phoenix seems bored of talking to you\) | \(The Phoenix glances at you, disinterestedly. Her vest is incredibly sweet\)"}
++ {!fenix_intro} "Excuse me"
+    -> fenix_intro
++ {fenix_intro} Leave her be
+    -> END
+
+== fenix_intro ==
+- \(The Phoenix is still looking over the balcony, but you're pretty sure she's listening\)
++ "Where is your King? I noticed the throneroom is empty?"
+- ...
++ "..?"
+- \(She sighs like a cool person\) 
+- We don't use a king anymore. That guy was lame so we ran him out of town
++ "Oh..!"
     -> END
 
 == wizzy ==
