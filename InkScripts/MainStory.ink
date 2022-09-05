@@ -251,8 +251,8 @@ Oh man, My Royal Wizard loves these! He's out on a research expedition right now
     -> END
     
 == cake_king_prison ==
-- TOWRITE placeholder prison cake
-+ "Zounds!"
+- Chef! You have to get me out of here! They've got me locked up right across from a bunch of bottles of Chocolate Syrup for some reason and it's freaking me out!
++ "Aye aye, your majesty!"
     -> END
 
 // recipe pages
