@@ -4,41 +4,41 @@ VAR inventory_2 = ""
 VAR score = 100
 
 // values
-VAR fishAndChips_value = 0
-VAR fries_value = 0
-VAR breadAndButter_value = 0
-VAR toastWithJam_value = 0
-VAR donut_value = 0
-VAR chocolateDonut_value = 0
-VAR pastryDough_value = 0
-VAR dough_value = 0
-VAR powderedDonut_value = 0
-VAR jellyDonut_value = 0
-VAR cherryPie_value = 0
-VAR meatPie_value = 0
-VAR gentlebirdPie_value = 0
-VAR potatoBread_value = 0
-VAR chips_value = 0
-VAR chipsAndSalsa_value = 0
-VAR nachos_value = 0
-VAR nachosSupreme_value = 0
-VAR pastaWithRedSauce_value = 0
-VAR pastaWithChocolateSauce_value = 0
-VAR veganPizza_value = 0
-VAR cheesePizza_value = 0
-VAR pepperoniPizza_value = 0
-VAR anchovyPizza_value = 0
-VAR friedEgg_value = 0
-VAR friesWithKetchup_value = 0
-VAR candyCherry_value = 0
-VAR cheeseSandwich_value = 0
-VAR mushroomPizza_value = 0
-VAR cheeseyBroccoli_value = 0
-VAR cheeseSauce_value = 0
-VAR bread_value = 0
-VAR pasta_value = 0
-VAR butter_value = 0
-VAR koolAid_value = 0
+VAR fishAndChips_value = 8
+VAR fries_value = 4
+VAR breadAndButter_value = 16
+VAR toastWithJam_value = 12
+VAR donut_value = 8
+VAR chocolateDonut_value = 16
+VAR pastryDough_value = 6
+VAR dough_value = 4
+VAR powderedDonut_value = 16
+VAR jellyDonut_value = 16
+VAR cherryPie_value = 32
+VAR meatPie_value = 64
+VAR gentlebirdPie_value = 64
+VAR potatoBread_value = 8
+VAR chips_value = 16
+VAR chipsAndSalsa_value = 32
+VAR nachos_value = 32
+VAR nachosSupreme_value = 64
+VAR pastaWithRedSauce_value = 32
+VAR pastaWithChocolateSauce_value = 32
+VAR veganPizza_value = 16
+VAR cheesePizza_value = 32
+VAR pepperoniPizza_value = 64
+VAR anchovyPizza_value = 64
+VAR friedEgg_value = 8
+VAR friesWithKetchup_value = 4
+VAR candyCherry_value = 8
+VAR cheeseSandwich_value = 24
+VAR mushroomPizza_value = 64
+VAR cheeseyBroccoli_value = 16
+VAR cheeseSauce_value = 4
+VAR bread_value = 4
+VAR pasta_value = 8
+VAR butter_value = 2
+VAR koolAid_value = 8
 
 
 == function inventory_has(item) ==
@@ -530,6 +530,27 @@ Delicious! Have ${koolAid_value} # take_koolAid
 + "..."
   -> END
 
+== sign_plain ==
+- NORTH: Castle von Cake
+- EAST: Mingus Farms Creamery
+- SOUTH: Royal Vacation Tower - CONDEMNED
++ "Got it"
+    -> END
+    
+== sign_sweet ==
+- NORTH: Castle von Oatmeal
+- EAST: Mingus Farms Jampitheatre
+- SOUTH: Royal Vacation Tower
++ "Got it"
+    -> END
+    
+== sign_salty ==
+- NORTH: Castle von Pemmican
+- EAST: Mingus Farms Marinarium
+- SOUTH: The People's Vacation Tower
++ "Got it"
+    -> END
+
 == ferryman ==
 - {ferryman_complete: Ready to cross the lake / sea? | {ferryman_intro: Do you have my Toast with Jam? | Why hello there! I. AM. THE. FERRYMAN! I help travelers sail from shore to shining shore. You, my good man, look like a box in need of a ride!}}
 + {!ferryman_intro} “I’m the royal chef, not a box.”
@@ -594,8 +615,8 @@ Delicious! Have ${koolAid_value} # take_koolAid
     -> END
 
 == wizzy ==
-+ What are you waiting for!? Get out there and save your king!
-- "Okay okay"
+- Feel free to use this portal any time you want to shift over to THE SWEETYVERSE
++ "Perfect"
     -> END
 
 == wheezy ==
