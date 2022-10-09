@@ -19,17 +19,21 @@ public class InkStory : MonoBehaviour
     private int destinationRealm;
     private float destinationX;
     private float destinationY;
+    private Sprite speakerSprite;
 
     // UI Prefabs
     public Text textPrefab;
     public Button buttonPrefab;
+    public Image imagePrefab;
+    private Image shownImage;
     
     public void Start() {
 	this.story = new Story(inkJSONAsset.text);
     }
     
-    public void OpenStory(string startingKnot) {
-	this.screenDimmer.color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
+    public void OpenStory(string startingKnot, Sprite speakerSprite) {
+	this.speakerSprite = speakerSprite;
+	this.screenDimmer.color = new Color(1.0f, 1.0f, 1.0f, 0.8f);
 	this.story.ChoosePathString(startingKnot);
 	this.isVisible = true;
 	this.RefreshView();
@@ -37,15 +41,18 @@ public class InkStory : MonoBehaviour
 
     private void RefreshView () {
 	this.ClearView();
-	
+
+	// show speaker image
+	Image speakerImage = Instantiate(imagePrefab) as Image;
+	speakerImage.sprite = this.speakerSprite;
+	speakerImage.transform.parent = this.canvas.transform;
+	this.shownImage = speakerImage;
+
 	// show next story text
 	while (this.story.canContinue) {
 	    Text storyText = Instantiate(textPrefab) as Text;
 	    storyText.text = this.story.Continue().Trim();
 	    storyText.transform.parent = this.canvas.transform;
-
-    	    Text dividerText = Instantiate(textPrefab) as Text;	     
-	    dividerText.transform.parent = this.canvas.transform;
 
 	    this.ProcessTags();
 	}
@@ -99,11 +106,7 @@ public class InkStory : MonoBehaviour
 	    // teleport player to new zone
 	    if (tag.StartsWith("send_to_")) {
 		string content = tag.Substring(8);
-		string[] contentParts = content.Split('|');
-		
-		foreach (string part in contentParts) {
-		    Debug.Log(part);
-		}
+		string[] contentParts = content.Split('|');	      
 
 		this.destinationZoneName = contentParts[0];
 		if (contentParts.Length == 1) {
@@ -164,13 +167,6 @@ public class InkStory : MonoBehaviour
 	    } else {
 		this.story.variablesState["inventory_" + i.ToString()] = "";
 	    }
-	}
-    }
-
-    public void DebugInventory() {
-	for (int i = 0; i < 3; i++) {
-	    Debug.Log(i);
-	    Debug.Log(this.story.variablesState["inventory_" + i.ToString()]);
 	}
     }
 }

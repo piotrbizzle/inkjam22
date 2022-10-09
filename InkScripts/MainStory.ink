@@ -4,41 +4,43 @@ VAR inventory_2 = ""
 VAR score = 100
 
 // values
-VAR fishAndChips_value = 28
-VAR fries_value = 12
-VAR breadAndButter_value = 20
-VAR toastWithJam_value = 24
-VAR donut_value = 32
-VAR chocolateDonut_value = 42
-VAR pastryDough_value = 20
-VAR dough_value = 12
-VAR powderedDonut_value = 38
-VAR jellyDonut_value = 40
-VAR cherryPie_value = 30
-VAR meatPie_value = 32
-VAR gentlebirdPie_value = 69
-VAR potatoBread_value = 15
-VAR chips_value = 21
-VAR chipsAndSalsa_value = 31
-VAR nachos_value = 36
-VAR nachosSupreme_value = 45
-VAR pastaWithRedSauce_value = 25
-VAR pastaWithChocolateSauce_value = 29
-VAR veganPizza_value = 22
-VAR cheesePizza_value = 36
-VAR pepperoniPizza_value = 44
 VAR anchovyPizza_value = 48
+VAR breadAndButter_value = 20
+VAR bread_value = 8
+VAR butter_value = 8
+VAR candyCherry_value = 16
+VAR cheesePizza_value = 36
+VAR cheeseSandwich_value = 17
+VAR cheeseSauce_value = 13
+VAR cheeseyBroccoli_value = 35
+VAR cherryPie_value = 30
+VAR chipsAndSalsa_value = 31
+VAR chips_value = 21
+VAR chocolateDonut_value = 42
+VAR donut_value = 32
+VAR dough_value = 12
+VAR fishAndChips_value = 28
 VAR friedEgg_value = 13
 VAR friesWithKetchup_value = 21
-VAR candyCherry_value = 16
-VAR cheeseSandwich_value = 17
-VAR mushroomPizza_value = 47
-VAR cheeseyBroccoli_value = 35
-VAR cheeseSauce_value = 13
-VAR bread_value = 8
-VAR pasta_value = 17
-VAR butter_value = 8
+VAR fries_value = 12
+VAR gentlebirdPie_value = 69
+VAR iceCreamWithSyrup_value = 12
+VAR jellyDonut_value = 40
 VAR koolAid_value = 15
+VAR meatPie_value = 32
+VAR mushroomPie_value = 35
+VAR mushroomPizza_value = 47
+VAR nachosSupreme_value = 45
+VAR nachos_value = 36
+VAR pastaWithChocolateSauce_value = 29
+VAR pastaWithRedSauce_value = 25
+VAR pasta_value = 17
+VAR pastryDough_value = 20
+VAR pepperoniPizza_value = 44
+VAR potatoBread_value = 15
+VAR powderedDonut_value = 38
+VAR toastWithJam_value = 24
+VAR veganPizza_value = 22
 
 
 == function inventory_has(item) ==
@@ -61,9 +63,13 @@ VAR koolAid_value = 15
 ~ score = score - fishAndChips_value
 Delicious! Have ${fishAndChips_value} # take_fishAndChips
    -> oatmeal_king
-+ {inventory_has("fries")} "Try this Fries" 
++ {inventory_has("fries")} "Try these Fries" 
 ~ score = score - fries_value
-Hm, I prefer my fries with ketchup. Still , pretty good! Have ${fries_value} # take_fries
+Hm, I prefer my fries with ketchup. Still, pretty good! Have ${fries_value} # take_fries
+   -> oatmeal_king
++ {inventory_has("iceCreamWithSyrup")} "Try this Ice Cream with Syrup" 
+~ score = score - iceCreamWithSyrup_value
+Chocolate sauce best sauce. I said it! Have ${iceCreamWithSyrup_value} # take_iceCreamWithSyrup
    -> oatmeal_king
 + {inventory_has("breadAndButter")} "Try this Bread and Butter" 
 ~ score = score - breadAndButter_value
@@ -135,7 +141,7 @@ Pretty good! Have ${pastaWithRedSauce_value} # take_pastaWithRedSauce
    -> oatmeal_king
 + {inventory_has("pastaWithChocolateSauce")} "Try this Pasta With Chocolate Sauce" 
 ~ score = score - pastaWithChocolateSauce_value
-Inventive! Have ${pastaWithChocolateSauce_value} # take_pastaWithChocolateSauce
+This is certainly unique! Have ${pastaWithChocolateSauce_value} # take_pastaWithChocolateSauce
    -> oatmeal_king
 + {inventory_has("veganPizza")} "Try this Vegan Pizza" 
 ~ score = score - veganPizza_value
@@ -172,6 +178,10 @@ More of a snack than a meal, but still good. Have ${cheeseSandwich_value} # take
 + {inventory_has("mushroomPizza")} "Try this Mushroom Pizza" 
 ~ score = score - mushroomPizza_value
 Chewy! Have ${mushroomPizza_value} # take_mushroomPizza
+   -> oatmeal_king
++ {inventory_has("mushroomPie")} "Try this Mushroom Pie" 
+~ score = score - mushroomPie_value
+Not for everyone, but I love it! Have ${mushroomPie_value} # take_mushroomPie
    -> oatmeal_king
 + {inventory_has("cheeseyBroccoli")} "Try this Cheesey Broccoli" 
 ~ score = score - cheeseyBroccoli_value
@@ -210,6 +220,8 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     -> cooker_fishAndChips
 + {inventory_has("oil") && inventory_has("potato")} Fries (Retail Value: ${fries_value})
     -> cooker_fries
++ {inventory_has("iceCream") && inventory_has("chocolateSyrup")} Ice Cream with Syrup (Retail Value: ${iceCreamWithSyrup_value})
+    -> cooker_iceCreamWithSyrup
 + {inventory_has("bread") && inventory_has("butter")} Bread and Butter (Retail Value: ${breadAndButter_value})
     -> cooker_breadAndButter
 + {inventory_has("bread") && inventory_has("jam")} Toast with Jam (Retail Value: ${toastWithJam_value})
@@ -264,6 +276,8 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     -> cooker_cheeseSandwich
 + {inventory_has("mushroom") && inventory_has("cheesePizza")} Mushroom Pizza (Retail Value: ${mushroomPizza_value})
     -> cooker_mushroomPizza
++ {inventory_has("mushroom") && inventory_has("pastryDough")} Mushroom Pie (Retail Value: ${mushroomPie_value})
+    -> cooker_mushroomPie
 + {inventory_has("broccoli") && inventory_has("cheeseSauce")} Cheesey Broccoli (Retail Value: ${cheeseyBroccoli_value})
     -> cooker_cheeseyBroccoli
 + {inventory_has("cheese") && inventory_has("butter")} Cheese Sauce (Retail Value: ${cheeseSauce_value})
@@ -276,7 +290,6 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     -> cooker_pasta
 + {inventory_has("popsicle")} Kool-Aid (Retail Value: ${koolAid_value})
     -> cooker_koolAid
-
 + Cook nothing
     -> END
     
@@ -289,6 +302,10 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 - You made Fries! # take_oil # take_potato # give_fries
 + Nice
      -> END
+== cooker_iceCreamWithSyrup ==
+- You made some Ice Cream with Syrup! So decadent! # take_iceCream # take_chocolateSyrup # give_iceCreamWithSyrup
++ Nice
+    -> END
 == cooker_breadAndButter ==
 - You made Bread and Butter! # take_bread # take_butter # give_breadAndButter
 + Nice
@@ -397,6 +414,10 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 - You made Mushroom Pizza! # take_mushroom # take_cheesePizza # give_mushroomPizza
 + Nice
      -> END
+== cooker_mushroomPie ==
+- You made Mushroom Pie! # take_mushroom # take_pastryDough # give_mushroomPie
++ Nice
+     -> END
 == cooker_cheeseyBroccoli ==
 - You made Cheesey Broccoli! # take_broccoli # take_cheeseSauce # give_cheeseyBroccoli
 + Nice
@@ -428,13 +449,13 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 - \(Oatmeal Raisin King distractedly picks at one his his raisins\)
 - Your so-called 'King' owes me big time, and you'd better pay up! Let's say... $100!
 + "But I'm just a simple Royal Chef. I spend all my money just paying the rent!"
-- Hmmm you do seem pretty impoverished. Tell you what, since you're a chef, why don't you  bring me delicious meals whose market value meets or exceeds $100?
+- Hmmm you do seem pretty impoverished. Tell you what, since you're a chef, why don't you bring me delicious foods whose market value meets or exceeds $100?
 + "And then you'll release Cake King?"
 - Yeah yeah I guess. Why do you like that guy anyway, I heard he makes you sleep in the kitchen?
 + "It's not so bad. The cooker keeps it nice and warm and smoky in there"
 - I guess, jeez...
 + "..."
-- Hurry up and bring me my food, you're bumming me out.
+- Hurry up and bring me my food.
 + "Right away!"
     -> END
     
@@ -448,9 +469,9 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 - Being a cake, he could make himself bigger and of higher status with more dough.
 + That does sound like something he would do. But how he did he get you to trade places with him?
 - He promised me sweets galore if I took his place as king for a bit in THE SWEETYVERSE. It sounded great, but his kingdom was uncared for -- on the brink of chaos!
-- Before I tell him the deal was off, he shut the rift between universes trapping me THE SWEETYVERSE! 
+- Before I could tell him the deal was off, he shut the rift between universes, trapping me THE SWEETYVERSE! 
 + How did you return to THE BLANDYVERSE to kidnap Cake King?
-- Only Cake King's Royal Wizard knew the secret of portal travel, so I had to task all of my court magicians to rediscover the technique. They only just cracked it this morning!
+- Only Cake King's Royal Wizard knew the secret of portal travel, so I had to task all of my court magicians with rediscovering the technique. They only just cracked it this morning!
 + "You mean Wizzy Woo is from THE SWEETYVERSE?"
 - Wizzy Woo? Is that your universe's Wheezy Wee?
 + "I think so"
@@ -507,7 +528,7 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     
 == knight_sweet_2 ==
 - Ready to Leave?
-+ "I guess so"
++ "Yeah!"
     -> exit_tower
 + "Nah"
     -> END
@@ -522,7 +543,7 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     
 == knight_salty_2 ==
 - Ready to Leave?
-+ "I guess so"
++ "Yeah!"
     -> exit_tower
 + "Nah"
     -> END
@@ -641,7 +662,7 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     -> END
     
 == fenix ==
-- {fenix_intro: \(The Phoenix seems tired of talking to you\) | \(The Phoenix glances at you, disinterestedly. Her vest is incredibly sweet\)"}
+- {fenix_intro: \(The Phoenix seems tired of talking to you\) | \(The Phoenix glances at you, disinterestedly. Her vest is incredibly sweet\)}
 + {!fenix_intro} "Excuse me"
     -> fenix_intro
 + {fenix_intro} Leave her be
@@ -733,9 +754,9 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 + "Okay"
     -> END
     
-== page_cheesey_brocolli ==
-- \= Cheesey Brocolli Recipe \=
-- 1 Brocolli
+== page_cheesey_broccoli ==
+- \= Cheesey Broccoli Recipe \=
+- 1 Broccoli
 - 1 Cheese Sauce
 + "Okay"
     -> END
@@ -755,7 +776,7 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     -> END
 
 == page_meat_pie ==
-- \= Dough Recipe \=
+- \= Meat Pie Recipe \=
 - 1 Meatball
 - 1 Pastry Dough
 + "Okay"
@@ -788,6 +809,311 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
 + "Okay"
     -> END
 
+// item names
+== item_anchovy ==
+- It's an Anchovy! Slimy!
++ "Okay"
+    -> END
+
+== item_anchovyPizza ==
+- It's an Anchovy Pizza! Polarizing!
++ "Okay"
+    -> END
+
+== item_banana ==
+- It's a Banana! Freudian!
++ "Okay"
+    -> END
+    
+== item_bananaSplit ==
+- It's a Banana Split! What is split about it? Nobody knows.
++ "Okay"
+    -> END
+
+== item_bread ==
+- It's a slice of Bread! Yeasty!
++ "Okay"
+    -> END
+
+== item_breadAndButter ==
+- It's Bread and Butter! Fundamental!
++ "Okay"
+    -> END
+
+== item_broccoli ==
+- It's Broccoli! Healthy!
++ "Okay"
+    -> END
+
+== item_butter ==
+- It's Butter! Fatty!
++ "Okay"
+    -> END
+
+== item_candyCane ==
+- It's a Candy Cane! Minty!
++ "Okay"
+    -> END
+
+== item_candyCherry ==
+- It's a Candy Cherry! Artificialious!
++ "Okay"
+    -> END
+
+== item_cheese ==
+- It's Cheese! Holy!
++ "Okay"
+    -> END
+
+== item_cheesePizza ==
+- It's a Cheese Pizza! Cowabunga!
++ "Okay"
+    -> END
+
+== item_cheeseSandwich ==
+- It's a Cheese Sandwich! Chewy!
++ "Okay"
+    -> END
+
+== item_cheeseSauce ==
+- It's Cheese Sauce! Thick!
++ "Okay"
+    -> END
+
+== item_cheeseyBroccoli ==
+- It's Cheesey Broccoli! Cheesey!
++ "Okay"
+    -> END
+
+== item_cherry ==
+- It's a Cherry! Fruity!
++ "Okay"
+    -> END
+
+== item_cherryPie ==
+- It's a Cherry Pie! Sweet!
++ "Okay"
+    -> END
+
+== item_chips ==
+- It's Chips! Chips!
++ "Okay"
+    -> END
+
+== item_chipsAndSalsa ==
+- It's Chips and Salsa! Spicy!
++ "Okay"
+    -> END
+
+== item_chocolateDonut ==
+- It's a Chocolate Donut! Chocolately!
++ "Okay"
+    -> END
+
+== item_chocolateSyrup ==
+- It's Chocolate Syrup! Rich!
++ "Okay"
+    -> END
+
+== item_cream ==
+- It's Cream! Creamy!
++ "Okay"
+    -> END
+
+== item_donut ==
+- It's a Donut! Plain!
++ "Okay"
+    -> END
+
+== item_dough ==
+- It's Dough! Kneady!
++ "Okay"
+    -> END
+
+== item_egg ==
+- It's an Egg! Fragile!
++ "Okay"
+    -> END
+
+== item_fish ==
+- It's a Fish! Aquatic!
++ "Okay"
+    -> END
+
+== item_fishAndChips ==
+- It's Fish and Chips! Fishy! (Also, Chippy!)
++ "Okay"
+    -> END
+
+== item_flour ==
+- It's Flour! Dry!
++ "Okay"
+    -> END
+
+== item_friedEgg ==
+- It's a Fried Egg! Breakfasty!
++ "Okay"
+    -> END
+
+== item_fries ==
+- It's Fries! Greasy!
++ "Okay"
+    -> END
+
+== item_friesWithKetchup ==
+- It's Fries with Ketchup! Ketchupy!
++ "Okay"
+    -> END
+
+== item_gentlebirdPie ==
+- It's a Gentlebird Pie! Criminal!
++ "Okay"
+    -> END
+
+== item_hotSauce ==
+- It's Hot Sauce! Vinegary!
++ "Okay"
+    -> END
+
+== item_iceCream ==
+- It's Ice Cream! Cold!
++ "Okay"
+    -> END
+
+== item_iceCreamWithSyrup ==
+- It's Ice Cream with Syrup! Syrupy!
++ "Okay"
+    -> END
+
+== item_jam ==
+- It's Jam! JAAAAAAAAAAAAM!
++ "Okay"
+    -> END
+
+== item_jellyDonut ==
+- It's a Jelly Donut! Messy!
++ "Okay"
+    -> END
+
+== item_koolAid ==
+- It's Kool-Aid! Drinkable!
++ "Okay"
+    -> END
+
+== item_marinara ==
+- It's Marinara Sauce! Tomatious!
++ "Okay"
+    -> END
+
+== item_meatPie ==
+- It's a Meat Pie! Filling!
++ "Okay"
+    -> END
+
+== item_meatball ==
+- It's a Meat Ball! Meaty!
++ "Okay"
+    -> END
+
+== item_mushroom ==
+- It's a Mushroom! Fungible!
++ "Okay"
+    -> END
+
+== item_mushroomPie ==
+- It's a Mushroom Pie! Mushy!
++ "Okay"
+    -> END
+
+== item_mushroomPizza ==
+- It's a Mushroom Pizza! Funky!
++ "Okay"
+    -> END
+
+== item_nachos ==
+- It's Nachos! Party time!
++ "Okay"
+    -> END
+
+== item_nachosSupreme ==
+- It's Nachos Supreme! KINGLY!
++ "Okay"
+    -> END
+
+== item_oil ==
+- It's Oil! Slick!
++ "Okay"
+    -> END
+
+== item_pasta ==
+- It's Pasta! Bland!
++ "Okay"
+    -> END
+
+== item_pastaWithChocolateSauce ==
+- It's Pasta with Chocolate Sauce! Inventive!
++ "Okay"
+    -> END
+
+== item_pastaWithRedSauce ==
+- It's Pasta with Red Sauce! Classico!
++ "Okay"
+    -> END
+
+== item_pastryDough ==
+- It's Pastry Dough! Flaky!
++ "Okay"
+    -> END
+
+== item_pepperoniPizza ==
+- It's Pepperoni Pizza! Popular!
++ "Okay"
+    -> END
+
+== item_popsicle ==
+- It's a Popsicle! Icy!
++ "Okay"
+    -> END
+
+== item_potato ==
+- It's a Potato! Nourishing!
++ "Okay"
+    -> END
+
+== item_potatoBread ==
+- It's Potato Bread! Hearty!
++ "Okay"
+    -> END
+
+== item_powderedDonut ==
+- It's a Powdered Donut! Dusty!
++ "Okay"
+    -> END
+
+== item_salt ==
+- It's Salt! Coarse!
++ "Okay"
+    -> END
+
+== item_sugar ==
+- It's Sugar! Grainy!
++ "Okay"
+    -> END
+
+== item_swedishFish ==
+- It's a Swedish Fish! Gummy!
++ "Okay"
+    -> END
+
+== item_toastWithJam ==
+- It's Toast with Jam! Jammy!
++ "Okay"
+    -> END
+
+== item_veganPizza ==
+- It's Vegan Pizza! Incomplete!
++ "Okay"
+    -> END
 
 // tutorial
 == tutorial_cake_king ==
@@ -809,7 +1135,7 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     -> END
     
 == tutorial_cake_king_give_fish ==
-- Yum yum yum. By the way, do you like the new rug? It commerates our adventure together last year. Remember that? 
+- Yum yum yum. By the way, do you like the new rug? It commerates our adventure together last year. Remember that?
 - I'm sure nothing that crazy will ever happen in our quiet kingdom EVER again #take_fishAndChips # send_to_throneRoomTut|3|-1.2|0.35
 + "What's that noise?"
   -> END
@@ -888,7 +1214,7 @@ Did you melt a popsicle into a glass? Just like Mama used to make! Have ${koolAi
     -> END
     
 == tutorial_cooker_ice_cream_with_syrup ==
-- You made some Ice Cream with Syrup! Decadent! # take_iceCream # take_chocolateSyrup # give_iceCreamWithSyrup
+- You made some Ice Cream with Syrup! So decadent! # take_iceCream # take_chocolateSyrup # give_iceCreamWithSyrup
 + Nice
     -> END
     

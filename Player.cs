@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
 	bool horizontal = left ^ right;
 	bool diagonal = vertical && horizontal;
 	
-	float speedScale = diagonal ? 4.2f : 6.0f;
+	float speedScale = diagonal ? 6.2f : 8.0f;
 
 	if (up && this.gameObject.transform.position.y < ScreenTopY + ScreenEdgeBuffer) {
 	    this.gameObject.transform.Translate(Vector3.up * Time.deltaTime * speedScale);
@@ -181,18 +181,11 @@ public class Player : MonoBehaviour
 	if (this.inkStory.isVisible) {
 	    return;
 	}
-	
-	// pick up item
-	Item item = collider.gameObject.GetComponent<Item>();
-	if (item != null && this.eHeld) {
-	    this.PickUp(item);
-	    return;
-	}
 
 	// start dialogue
 	Dialogue dialogue = collider.gameObject.GetComponent<Dialogue>();
-	if (dialogue != null && this.spaceHeld) {
-	    this.inkStory.OpenStory(dialogue.startingKnot);
+	if (dialogue != null && this.spaceHeld) {	    
+	    this.inkStory.OpenStory(dialogue.startingKnot, dialogue.gameObject.GetComponent<SpriteRenderer>().sprite);
 	    return;
 	}
 
@@ -204,6 +197,19 @@ public class Player : MonoBehaviour
 		this.SetRealm(destinationRealm);
 		portal.resetPortal();
 	    }
+	}
+	
+	// pick up item
+	Item item = collider.gameObject.GetComponent<Item>();
+	if (item != null && this.eHeld) {
+	    this.PickUp(item);
+	    return;
+	}
+
+	// identify item
+	if (item != null && item.pickUpable && this.spaceHeld) {
+	    this.inkStory.OpenStory("item_" + item.GetItemName(), item.gameObject.GetComponent<SpriteRenderer>().sprite);
+	    return;
 	}
     }
 
@@ -301,7 +307,7 @@ public class Player : MonoBehaviour
 
 	if (this.teleportCounter > HalfTeleportCounter) {
 	    // turning solid for the first half of the counter
-	    float alpha = Math.Min(1 + 0.7f * (HalfTeleportCounter - this.teleportCounter) / HalfTeleportCounter, 1.0f);
+	    float alpha = Math.Min(1 + 0.2f * (HalfTeleportCounter - this.teleportCounter) / HalfTeleportCounter, 1.0f);
 	    this.screenDimmer.color = new Color(1.0f, 1.0f, 1.0f, alpha);
 	} else if (this.teleportCounter > 0.0f) {
 	    // then turning clear
